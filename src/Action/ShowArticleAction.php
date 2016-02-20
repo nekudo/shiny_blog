@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Action;
 
-class Article
+class ShowArticleAction
 {
     public function __invoke(array $arguments)
     {

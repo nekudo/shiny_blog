@@ -10,6 +10,7 @@ class HttpResponder
         200 => 'OK',
         404 => 'Not Found',
         405 => 'Method Not Allowed',
+        500 => 'Internal Server Error',
     ];
 
     public function found()
@@ -27,6 +28,12 @@ class HttpResponder
     public function methodNotAllowed()
     {
         $this->statusCode = 405;
+        $this->respond();
+    }
+
+    public function error()
+    {
+        $this->statusCode = 500;
         $this->respond();
     }
 

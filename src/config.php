@@ -6,7 +6,7 @@ return [
         'home' => [
             'method' => 'GET',
             'route' => '/',
-            'action' => 'home'
+            'action' => 'page'
         ],
         'article' => [
             'method' => 'GET',
