@@ -3,11 +3,11 @@ declare(strict_types=1);
 namespace Nekudo\ShinyBlog;
 
 use Exception;
-use Nekudo\ShinyBlog\Action\Article;
-use Nekudo\ShinyBlog\Action\Home;
 use RuntimeException;
 use FastRoute;
 use FastRoute\RouteCollector;
+use Nekudo\ShinyBlog\Action\ShowArticleAction;
+use Nekudo\ShinyBlog\Action\ShowPageAction;
 use Nekudo\ShinyBlog\Responder\HttpResponder;
 
 class ShinyBlog
@@ -47,12 +47,12 @@ class ShinyBlog
         if (empty($this->config['routes'])) {
             throw new RuntimeException('No routes defined in configuration file.');
         }
-        $this->dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
+        $this->dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $collector) {
             foreach ($this->config['routes'] as $routeName => $route) {
                 if (empty($route['method']) || empty($route['route']) || empty($route['action'])) {
                     throw new RuntimeException('Invalid route in configuration.');
                 }
-                $r->addRoute($route['method'], $route['route'], $route['action']);
+                $collector->addRoute($route['method'], $route['route'], $route['action']);
             }
         });
     }
@@ -96,11 +96,11 @@ class ShinyBlog
     protected function runAction(string $actionName, array $arguments = [])
     {
         switch ($actionName) {
-            case 'home':
-                $action = new Home;
+            case 'page':
+                $action = new ShowPageAction;
                 break;
             case 'article':
-                $action = new Article;
+                $action = new ShowArticleAction;
                 break;
             default:
                 throw new RuntimeException('Invalid action.');
