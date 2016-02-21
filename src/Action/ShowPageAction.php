@@ -12,6 +12,9 @@ class ShowPageAction extends Action
      */
     protected $domain;
 
+    /**
+     * @var ShowPageResponder $responder
+     */
     protected $responder;
 
     public function __construct(array $config)
@@ -21,6 +24,11 @@ class ShowPageAction extends Action
         $this->responder = new ShowPageResponder($config);
     }
 
+    /**
+     * Renders requested page and sends it to client.
+     *
+     * @param array $arguments
+     */
     public function __invoke(array $arguments)
     {
         $pageName = $this->domain->getPageName();
