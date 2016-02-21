@@ -2,9 +2,11 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Responder;
 
-class HttpResponder
+class HttpResponder extends Responder
 {
     protected $statusCode = 200;
+
+    protected $payload = '';
 
     protected $statusMessages = [
         200 => 'OK',
@@ -13,8 +15,9 @@ class HttpResponder
         500 => 'Internal Server Error',
     ];
 
-    public function found()
+    public function found(string $payload = '')
     {
+        $this->payload = $payload;
         $this->statusCode = 200;
         $this->respond();
     }
@@ -31,8 +34,9 @@ class HttpResponder
         $this->respond();
     }
 
-    public function error()
+    public function error(string $payload = '')
     {
+        $this->payload = $payload;
         $this->statusCode = 500;
         $this->respond();
     }
@@ -42,5 +46,8 @@ class HttpResponder
         $statusMessage = $this->statusMessages[$this->statusCode];
         $header = sprintf('HTTP/1.1 %d %s', $this->statusCode, $statusMessage);
         header($header);
+        if (!empty($this->payload)) {
+            echo $this->payload;
+        }
     }
 }
