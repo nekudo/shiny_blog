@@ -33,7 +33,8 @@ class ShinyBlog
             $this->setRoutes();
             $this->dispatch();
         } catch(Exception $e) {
-            // @todo throw some kind of error 500...
+            $responder = new HttpResponder($this->config);
+            $responder->error($e->getMessage());
         }
     }
 
@@ -97,7 +98,7 @@ class ShinyBlog
     {
         switch ($actionName) {
             case 'page':
-                $action = new ShowPageAction;
+                $action = new ShowPageAction($this->config);
                 break;
             case 'article':
                 $action = new ShowArticleAction;
