@@ -5,7 +5,7 @@ namespace Nekudo\ShinyBlog\Domain;
 use RuntimeException;
 use ParsedownExtra;
 
-class ContentDomain extends Domain
+class ContentDomain extends BaseDomain
 {
     protected $contentRaw = '';
 
@@ -38,7 +38,7 @@ class ContentDomain extends Domain
 
         $content = [];
         $sections = explode('::METAEND::', $this->contentRaw);
-        $content['meta'] = json_decode($sections[0]);
+        $content['meta'] = json_decode($sections[0], true);
         $content['content'] = trim($sections[1]);
         if (!empty($content['content'])) {
             $content['content'] = $this->markdownParser->text($content['content']);

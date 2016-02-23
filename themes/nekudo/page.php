@@ -1,3 +1,3 @@
 <div class="page">
-    <?php echo $content; ?>
+    <?php echo $page->getContent(); ?>
 </div>
