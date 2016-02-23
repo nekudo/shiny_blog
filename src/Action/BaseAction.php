@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Action;
 
-abstract class Action
+abstract class BaseAction
 {
     protected $config = [];
 

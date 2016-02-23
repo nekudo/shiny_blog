@@ -17,7 +17,7 @@ return [
         ],
         'article' => [
             'method' => 'GET',
-            'route' => '/blog/{alias:[a-z0-9-]+}',
+            'route' => '/blog/{slug:[a-z0-9-]+}',
             'action' => 'article',
         ],
     ],

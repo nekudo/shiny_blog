@@ -2,21 +2,33 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Domain;
 
+use Nekudo\ShinyBlog\Domain\Entity\PageEntity;
+
 class ShowPageDomain extends ContentDomain
 {
     /**
-     * Extracts page name from current request URI.
+     * Generates pages filename from current request URI.
      *
      * @return string
      */
-    public function getPageName() : string
+    public function getPageFilename() : string
     {
         $uri = rawurldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         $pageName = trim($uri, '/');
         if (empty($pageName)) {
             $pageName = 'home';
         }
-        return $pageName;
+        return $pageName . '.md';
+    }
+
+    public function getPageByFilename(string $filename) : PageEntity
+    {
+        $pagedataPath = $this->config['contentsFolder'] . 'pages/' . $filename;
+        $pageContent = $this->parseContentFile($pagedataPath);
+        $page = new PageEntity;
+        $page->setContent($pageContent['content']);
+        $page->setMeta($pageContent['meta']);
+        return $page;
     }
 
     /**

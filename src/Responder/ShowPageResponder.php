@@ -2,17 +2,18 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Responder;
 
+use Nekudo\ShinyBlog\Domain\Entity\PageEntity;
+
 class ShowPageResponder extends HtmlResponder
 {
     /**
      * Renders a page and sends it to client.
      *
-     * @param array $pageContent
+     * @param PageEntity $page
      */
-    public function renderPage(array $pageContent)
+    public function renderPage(PageEntity $page)
     {
-        $this->assign('meta', $pageContent['meta']);
-        $this->assign('content', $pageContent['content']);
+        $this->assign('page', $page);
         $this->show('page');
     }
 }

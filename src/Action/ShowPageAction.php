@@ -5,7 +5,7 @@ namespace Nekudo\ShinyBlog\Action;
 use Nekudo\ShinyBlog\Domain\ShowPageDomain;
 use Nekudo\ShinyBlog\Responder\ShowPageResponder;
 
-class ShowPageAction extends Action
+class ShowPageAction extends BaseAction
 {
     /**
      * @var ShowPageDomain $domain
@@ -31,8 +31,8 @@ class ShowPageAction extends Action
      */
     public function __invoke(array $arguments)
     {
-        $pageName = $this->domain->getPageName();
-        $pageContent = $this->domain->getPageContent($pageName);
-        $this->responder->renderPage($pageContent);
+        $pageName = $this->domain->getPageFilename();
+        $page = $this->domain->getPageByFilename($pageName);
+        $this->responder->renderPage($page);
     }
 }

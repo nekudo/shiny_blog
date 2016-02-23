@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Domain;
 
-class Domain
+class BaseDomain
 {
     protected $config = [];
 
