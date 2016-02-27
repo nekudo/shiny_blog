@@ -21,9 +21,10 @@ class ContentDomain extends BaseDomain
      * Parses a content-file and splits data into a meta and content section.
      *
      * @param string $pathToFile
+     * @param bool $parseMarkdown
      * @return array
      */
-    public function parseContentFile(string $pathToFile) : array
+    public function parseContentFile(string $pathToFile, bool $parseMarkdown = true) : array
     {
         if (!file_exists($pathToFile)) {
             throw new RuntimeException('Page content not found');
@@ -40,10 +41,25 @@ class ContentDomain extends BaseDomain
         $sections = explode('::METAEND::', $this->contentRaw);
         $content['meta'] = json_decode($sections[0], true);
         $content['content'] = trim($sections[1]);
-        if (!empty($content['content'])) {
-            $content['content'] = $this->markdownParser->text($content['content']);
+        if ($parseMarkdown === true) {
+            $this->parseMarkdownOfContent($content);
         }
 
         return $content;
+    }
+
+    /**
+     * Translates markdown content to html.
+     *
+     * @param array $content
+     * @return bool
+     */
+    public function parseMarkdownOfContent(array &$content) : bool
+    {
+        if (empty($content['content'])) {
+            return false;
+        }
+        $content['content'] = $this->markdownParser->text($content['content']);
+        return true;
     }
 }
