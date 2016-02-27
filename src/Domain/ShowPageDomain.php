@@ -7,40 +7,33 @@ use Nekudo\ShinyBlog\Domain\Entity\PageEntity;
 class ShowPageDomain extends ContentDomain
 {
     /**
-     * Generates pages filename from current request URI.
+     * Fetches page alias from current request URI.
      *
      * @return string
      */
-    public function getPageFilename() : string
+    public function getPageSlug() : string
     {
         $uri = rawurldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         $pageName = trim($uri, '/');
         if (empty($pageName)) {
             $pageName = 'home';
         }
-        return $pageName . '.md';
+        return $pageName;
     }
 
-    public function getPageByFilename(string $filename) : PageEntity
+    /**
+     * Renders content from pages markdown file and returns page object.
+     *
+     * @param string $slug
+     * @return PageEntity
+     */
+    public function getPageBySlug(string $slug) : PageEntity
     {
-        $pagedataPath = $this->config['contentsFolder'] . 'pages/' . $filename;
-        $pageContent = $this->parseContentFile($pagedataPath);
+        $pathToContentFile = $this->config['contentsFolder'] . 'pages/' . $slug . '.md';
+        $pageContent = $this->parseContentFile($pathToContentFile);
         $page = new PageEntity;
         $page->setContent($pageContent['content']);
         $page->setMeta($pageContent['meta']);
         return $page;
-    }
-
-    /**
-     * Retrieves page content from pages markdown file.
-     *
-     * @param string $pageName
-     * @return array
-     */
-    public function getPageContent(string $pageName) : array
-    {
-        $contentPath = $this->config['contentsFolder'] . 'pages/' . $pageName . '.md';
-        $pageContent = $this->parseContentFile($contentPath);
-        return $pageContent;
     }
 }

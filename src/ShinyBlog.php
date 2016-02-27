@@ -101,7 +101,7 @@ class ShinyBlog
                 $action = new ShowPageAction($this->config);
                 break;
             case 'article':
-                $action = new ShowArticleAction;
+                $action = new ShowArticleAction($this->config);
                 break;
             default:
                 throw new RuntimeException('Invalid action.');
