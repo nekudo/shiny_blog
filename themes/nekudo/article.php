@@ -1,7 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: simon
- * Date: 20.02.16
- * Time: 16:15
- */
+<div class="article">
+    <?php echo $article->getContent(); ?>
+</div>
