@@ -31,8 +31,8 @@ class ShowPageAction extends BaseAction
      */
     public function __invoke(array $arguments)
     {
-        $pageName = $this->domain->getPageFilename();
-        $page = $this->domain->getPageByFilename($pageName);
+        $pageAlias = $this->domain->getPageSlug();
+        $page = $this->domain->getPageBySlug($pageAlias);
         $this->responder->renderPage($page);
     }
 }
