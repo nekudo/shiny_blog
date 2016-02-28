@@ -32,7 +32,7 @@ class ShowBlogAction extends BaseAction
             $page = (isset($arguments['page'])) ? (int)$arguments['page'] : 0;
             $articles = $this->domain->getArticles($page);
             $this->responder->assign('articles', $articles);
-            $this->responder->show('blog');
+            $this->responder->__invoke();
         } catch (NotFoundException $e) {
             $this->responder->notFound($e->getMessage());
         }
