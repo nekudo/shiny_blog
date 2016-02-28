@@ -11,7 +11,7 @@ return [
 
     // Articles per page:
     'pagination' => [
-        'limit' => 10,
+        'limit' => 5,
     ],
 
     // Routes to pages, articles, e.g (Hint: Every page needs its own route!)
@@ -29,16 +29,19 @@ return [
         'blog' => [
             'method' => 'GET',
             'route' => '/blog',
+            'buildPattern' => '/blog',
             'action' => 'blog',
         ],
         'blog_paginated' => [
             'method' => 'GET',
             'route' => '/blog/page-{page:[0-9]+}',
+            'buildPattern' => '/blog/page-%d',
             'action' => 'blog',
         ],
         'article' => [
             'method' => 'GET',
             'route' => '/blog/{slug:[a-z0-9-]+}',
+            'buildPattern' => '/blog/%s',
             'action' => 'article',
         ],
     ],
