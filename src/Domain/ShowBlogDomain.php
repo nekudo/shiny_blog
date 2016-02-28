@@ -52,10 +52,48 @@ class ShowBlogDomain extends ContentDomain
     protected function pageIsValid(int $page) : bool
     {
         $limit = $this->config['pagination']['limit'];
-        $pages = ceil($this->articleCount / $limit);
+        $pages = (int) ceil($this->articleCount / $limit);
         if ($page > $pages || $page < 0) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns URL to previous page. Will be empty if already on first page.
+     *
+     * @param int $page
+     * @return string
+     */
+    public function getUrlPrevPage(int $page) : string
+    {
+        if ($page <= 1) {
+            return '';
+        }
+        $prevPage = $page - 1;
+        if ($prevPage === 1) {
+            return $this->config['routes']['blog']['buildPattern'];
+        }
+        return sprintf($this->config['routes']['blog_paginated']['buildPattern'], $prevPage);
+    }
+
+    /**
+     * Returns URL to next page. Will be empty if already in last page.
+     *
+     * @param int $page
+     * @return string
+     */
+    public function getUrlNextPage(int $page) : string
+    {
+        if ($page === 0) {
+            $page = 1;
+        }
+        $limit = $this->config['pagination']['limit'];
+        $pages = (int) ceil($this->articleCount / $limit);
+        if ($page >= $pages) {
+            return '';
+        }
+        $nextPage = $page + 1;
+        return sprintf($this->config['routes']['blog_paginated']['buildPattern'], $nextPage);
     }
 }

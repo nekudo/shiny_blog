@@ -11,8 +11,8 @@ class ArticleEntity extends BaseEntity
      */
     public function getUrl() : string
     {
-        $baseUrl = rtrim($this->config['routes']['blog']['route'], '/');
-        return $baseUrl . '/' . $this->getSlug();
+        $urlBuildPattern = $this->config['routes']['article']['buildPattern'];
+        return sprintf($urlBuildPattern, $this->getSlug());
     }
 
     /**
