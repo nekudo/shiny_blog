@@ -5,6 +5,10 @@ return [
     // Theme to use:
     'theme' => 'nekudo',
 
+    'themeSettings' => [
+        'readMore' => '<a href="%s" class="btn">Read on &raquo;</a>',
+    ],
+
     // Articles per page:
     'pagination' => [
         'limit' => 10,

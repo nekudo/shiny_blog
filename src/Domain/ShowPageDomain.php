@@ -31,7 +31,7 @@ class ShowPageDomain extends ContentDomain
     {
         $pathToContentFile = $this->config['contentsFolder'] . 'pages/' . $slug . '.md';
         $pageContent = $this->parseContentFile($pathToContentFile);
-        $page = new PageEntity;
+        $page = new PageEntity($this->config);
         $page->setContent($pageContent['content']);
         $page->setMeta($pageContent['meta']);
         return $page;

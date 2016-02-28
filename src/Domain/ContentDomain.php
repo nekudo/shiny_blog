@@ -82,7 +82,7 @@ class ContentDomain extends BaseDomain
         for ($i = $start; $i <= $end; $i++) {
             $key = $keys[$i];
             $articleContent = $this->parseContentFile($this->articleMeta[$key]['file']);
-            $article = new ArticleEntity;
+            $article = new ArticleEntity($this->config);
             $article->setMeta($articleContent['meta']);
             $article->setContent($articleContent['content']);
             array_push($articles, $article);

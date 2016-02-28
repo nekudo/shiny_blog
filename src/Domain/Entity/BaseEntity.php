@@ -4,6 +4,8 @@ namespace Nekudo\ShinyBlog\Domain\Entity;
 
 class BaseEntity
 {
+    protected $config;
+
     /** @var string $slug */
     protected $slug;
 
@@ -15,6 +17,11 @@ class BaseEntity
 
     /** @var string $content */
     protected $content;
+
+    public function __construct(array $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * Sets metadata from markdown file to corresponding object properties.
