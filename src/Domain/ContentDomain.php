@@ -58,26 +58,34 @@ class ContentDomain extends BaseDomain
     /**
      * Loads articles from set of metadata.
      *
-     * @param int $limit
+     * @param int $start
+     * @param int $end
      * @return array
      */
-    protected function getArticlesFromMeta(int $limit) : array
+    protected function getArticlesFromMeta(int $start = 0, int $end = 0) : array
     {
         $articles = [];
         if (empty($this->articleMeta)) {
             return $articles;
         }
-        $cnt = 0;
-        foreach ($this->articleMeta as $meta) {
-            $articleContent = $this->parseContentFile($meta['file']);
+        $metaCount = count($this->articleMeta);
+        if ($start >= $metaCount) {
+            throw new RuntimeException('Start value can not be greater than total items.');
+        }
+        if ($end >= $metaCount) {
+            throw new RuntimeException('End value can not be greater than total items.');
+        }
+        if ($end === 0) {
+            $end = $metaCount - 1;
+        }
+        $keys = array_keys($this->articleMeta);
+        for ($i = $start; $i <= $end; $i++) {
+            $key = $keys[$i];
+            $articleContent = $this->parseContentFile($this->articleMeta[$key]['file']);
             $article = new ArticleEntity;
             $article->setMeta($articleContent['meta']);
             $article->setContent($articleContent['content']);
             array_push($articles, $article);
-            $cnt++;
-            if ($cnt === $limit) {
-                break;
-            }
         }
         return $articles;
     }
