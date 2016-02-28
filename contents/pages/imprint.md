@@ -4,8 +4,6 @@
 
 ::METAEND::
 
-# Imprint
-
 bla bla bla
 
 * li
