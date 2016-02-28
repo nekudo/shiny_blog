@@ -7,6 +7,7 @@ use RuntimeException;
 use FastRoute;
 use FastRoute\RouteCollector;
 use Nekudo\ShinyBlog\Action\ShowArticleAction;
+use Nekudo\ShinyBlog\Action\ShowBlogAction;
 use Nekudo\ShinyBlog\Action\ShowPageAction;
 use Nekudo\ShinyBlog\Responder\HttpResponder;
 
@@ -71,11 +72,11 @@ class ShinyBlog
         }
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
-                $responder = new HttpResponder;
+                $responder = new HttpResponder($this->config);
                 $responder->notFound();
                 break;
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-                $responder = new HttpResponder;
+                $responder = new HttpResponder($this->config);
                 $responder->methodNotAllowed();
                 break;
             case FastRoute\Dispatcher::FOUND:
@@ -102,6 +103,9 @@ class ShinyBlog
                 break;
             case 'article':
                 $action = new ShowArticleAction($this->config);
+                break;
+            case 'blog':
+                $action = new ShowBlogAction($this->config);
                 break;
             default:
                 throw new RuntimeException('Invalid action.');
