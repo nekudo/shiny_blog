@@ -21,7 +21,7 @@ class ShowArticleDomain extends ContentDomain
             throw new NotFoundException('Article not found.');
         }
         $articleData = $this->parseContentFile($this->articleMeta[$slug]['file']);
-        $article = new ArticleEntity;
+        $article = new ArticleEntity($this->config);
         $article->setContent($articleData['content']);
         $article->setMeta($articleData['meta']);
         return $article;
