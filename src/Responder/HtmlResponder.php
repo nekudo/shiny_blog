@@ -67,7 +67,7 @@ class HtmlResponder extends HttpResponder
      * @param string $templateName
      * @return string
      */
-    public function renderTemplate(string $templateName) : string
+    protected function renderTemplate(string $templateName) : string
     {
         $templateFile = $this->themeFolder . $templateName . '.php';
         return $this->render($templateFile);
@@ -78,7 +78,7 @@ class HtmlResponder extends HttpResponder
      *
      * @return string
      */
-    public function renderLayout() : string
+    protected function renderLayout() : string
     {
         $layoutFile = $this->themeFolder .'layouts/' . $this->layout . '.php';
         return $this->render($layoutFile);
