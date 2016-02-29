@@ -9,6 +9,14 @@ return [
         'readMore' => '<a href="%s" class="btn">Read on &raquo;</a>',
     ],
 
+    'titles' => [
+        'home' => 'nekudo.com - web application development',
+        'blog' => 'nekudo.com Blog',
+        'blog_paginated' => 'nekudo.com Blog - Page %d',
+        'article' => '%s | nekudo.com',
+        'page' => '%s | nekudo.com',
+    ],
+
     // Articles per page:
     'pagination' => [
         'limit' => 5,
