@@ -30,6 +30,7 @@ class ShowBlogAction extends BaseAction
     {
         try {
             $page = (isset($arguments['page'])) ? (int)$arguments['page'] : 0;
+            $this->responder->setPage($page);
             $this->responder->assign('articles', $this->domain->getArticles($page));
             $this->responder->assign('urlNextPage', $this->domain->getUrlNextPage($page));
             $this->responder->assign('urlPrevPage', $this->domain->getUrlPrevPage($page));
