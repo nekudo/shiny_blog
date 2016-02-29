@@ -31,6 +31,7 @@ class ShowArticleAction extends BaseAction
         try {
             $slug = $arguments['slug'];
             $article = $this->domain->getArticleBySlug($slug);
+            $this->responder->setTitle($article->getTitle());
             $this->responder->assign('article', $article);
             $this->responder->__invoke();
         } catch (NotFoundException $e) {

@@ -1,8 +1,6 @@
 <html>
 <head>
-<?php if (isset($meta->title)): ?>
-    <title><?php echo $meta->title; ?></title>
-<?php endif; ?>
+    <title><?php echo $this->getTitle(); ?></title>
 </head>
 <body>
     <div class="content">

@@ -12,9 +12,17 @@ class HtmlResponder extends HttpResponder
     protected $layout = 'default';
 
     /**
+     * @var string $templateName Template to render.
+     */
+    protected $templateName = '';
+
+    /**
      * @var string $themeFolder Folder containing templates/layouts.
      */
     protected $themeFolder = '';
+
+    /** @var string $pageTitle */
+    protected $pageTitle = '';
 
     /**
      * @var array $templateData Data available within templates/layouts.
@@ -35,6 +43,26 @@ class HtmlResponder extends HttpResponder
     public function setLayout(string $layout)
     {
         $this->layout = $layout;
+    }
+
+    /**
+     * Sets page-title.
+     *
+     * @param string $title
+     */
+    public function setTitle(string $title)
+    {
+        $this->pageTitle = $title;
+    }
+
+    public function getTitle() : string
+    {
+        if (!isset($this->config['titles'][$this->templateName])) {
+            return $this->pageTitle;
+        }
+        $titlePattern = $this->config['titles'][$this->templateName];
+        $title = sprintf($titlePattern, $this->pageTitle);
+        return $title;
     }
 
     /**
@@ -69,6 +97,7 @@ class HtmlResponder extends HttpResponder
      */
     protected function renderTemplate(string $templateName) : string
     {
+        $this->templateName = $templateName;
         $templateFile = $this->themeFolder . $templateName . '.php';
         return $this->render($templateFile);
     }
