@@ -21,8 +21,15 @@ class HtmlResponder extends HttpResponder
      */
     protected $themeFolder = '';
 
-    /** @var string $pageTitle */
+    /**
+     * @var string $pageTitle Title of page.
+     */
     protected $pageTitle = '';
+
+    /**
+     * @var int $page Current page.
+     */
+    protected $page = 0;
 
     /**
      * @var array $templateData Data available within templates/layouts.
@@ -55,14 +62,45 @@ class HtmlResponder extends HttpResponder
         $this->pageTitle = $title;
     }
 
+    /**
+     * Returns formatted page title.
+     *
+     * @return string
+     */
     public function getTitle() : string
     {
-        if (!isset($this->config['titles'][$this->templateName])) {
-            return $this->pageTitle;
+        switch ($this->templateName) {
+            case 'home':
+                $title = $this->config['titles']['home'];
+                break;
+            case 'blog':
+                if ($this->page > 1) {
+                    $title = sprintf($this->config['titles']['blog_paginated'], $this->page);
+                } else {
+                    $title = $this->config['titles']['blog'];
+                }
+                break;
+            case 'page':
+                $title = sprintf($this->config['titles']['page'], $this->pageTitle);
+                break;
+            case 'article':
+                $title = sprintf($this->config['titles']['article'], $this->pageTitle);
+                break;
+            default:
+                $title = $this->pageTitle;
+                break;
         }
-        $titlePattern = $this->config['titles'][$this->templateName];
-        $title = sprintf($titlePattern, $this->pageTitle);
         return $title;
+    }
+
+    /**
+     * Sets paginated value (Should be true if page > 1)
+     *
+     * @param int $page
+     */
+    public function setPage(int $page)
+    {
+        $this->page = $page;
     }
 
     /**
