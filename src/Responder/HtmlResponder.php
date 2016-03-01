@@ -26,6 +26,9 @@ class HtmlResponder extends HttpResponder
      */
     protected $pageTitle = '';
 
+    /** @var string $description Pages meta description */
+    protected $description = '';
+
     /**
      * @var int $page Current page.
      */
@@ -71,9 +74,6 @@ class HtmlResponder extends HttpResponder
     {
         $config = $this->config['seo'];
         switch ($this->templateName) {
-            case 'home':
-                $title = $config['home']['title'];
-                break;
             case 'blog':
                 if ($this->page > 1) {
                     $title = sprintf($config['blog_paginated']['title'], $this->page);
@@ -94,6 +94,41 @@ class HtmlResponder extends HttpResponder
         return $title;
     }
 
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Gets meta-description for current page type.
+     *
+     * @return string
+     */
+    public function getDescription() : string
+    {
+        $config = $this->config['seo'];
+        $pageType = $this->getPageType();
+        switch ($pageType) {
+            case 'blog':
+            case 'blog_paginated':
+                $description = $config[$pageType]['description'];
+                break;
+            case 'page':
+            case 'article':
+                $description = sprintf($config[$pageType]['description'], $this->description);
+                break;
+            default:
+                $description = $this->description;
+                break;
+        }
+        return $description;
+    }
+
+    /**
+     * Gets index,follow/nofollow setting for current page type.
+     *
+     * @return string
+     */
     public function getIndex() : string
     {
         $pageType = $this->getPageType();
@@ -103,6 +138,11 @@ class HtmlResponder extends HttpResponder
         return $this->config['seo'][$pageType]['index'];
     }
 
+    /**
+     * Returns current page type.
+     *
+     * @return string
+     */
     protected function getPageType() : string
     {
         $pageType = $this->templateName;
