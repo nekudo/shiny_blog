@@ -9,12 +9,33 @@ return [
         'readMore' => '<a href="%s" class="btn">Read on &raquo;</a>',
     ],
 
-    'titles' => [
-        'home' => 'nekudo.com - web application development',
-        'blog' => 'nekudo.com Blog',
-        'blog_paginated' => 'nekudo.com Blog - Page %d',
-        'article' => '%s | nekudo.com',
-        'page' => '%s | nekudo.com',
+    // SEO settings (title-tags, description, ...)
+    'seo' => [
+        'home' => [
+            'title' => 'nekudo.com - web application development',
+            'description' => '',
+            'index' => 'index,follow'
+        ],
+        'blog' => [
+            'title' => 'nekudo.com Blog: Project news and web development articles',
+            'description' => '',
+            'index' => 'index,follow'
+        ],
+        'blog_paginated' => [
+            'title' => 'nekudo.com Blog - Page %d',
+            'description' => '',
+            'index' => 'noindex,follow'
+        ],
+        'article' => [
+            'title' => '%s | nekudo.com',
+            'description' => '',
+            'index' => 'index,follow'
+        ],
+        'page' => [
+            'title' => '%s | nekudo.com',
+            'description' => '',
+            'index' => 'index,follow'
+        ],
     ],
 
     // Articles per page:
