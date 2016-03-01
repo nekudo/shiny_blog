@@ -13,7 +13,10 @@ class BaseEntity
     protected $date;
 
     /** @var string $title */
-    protected $title;
+    protected $title = '';
+
+    /** @var  string $description Meta description */
+    protected $description = '';
 
     /** @var string $content */
     protected $content;
@@ -76,6 +79,16 @@ class BaseEntity
     public function getTitle() : string
     {
         return $this->title;
+    }
+
+    /**
+     * Returns meta-description property.
+     *
+     * @return string
+     */
+    public function getDescription() : string
+    {
+        return $this->description;
     }
 
     /**

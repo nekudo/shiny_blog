@@ -11,29 +11,24 @@ return [
 
     // SEO settings (title-tags, description, ...)
     'seo' => [
-        'home' => [
-            'title' => 'nekudo.com - web application development',
-            'description' => '',
-            'index' => 'index,follow'
-        ],
         'blog' => [
             'title' => 'nekudo.com Blog: Project news and web development articles',
-            'description' => '',
+            'description' => 'Blog description',
             'index' => 'index,follow'
         ],
         'blog_paginated' => [
             'title' => 'nekudo.com Blog - Page %d',
-            'description' => '',
+            'description' => 'Blog description',
             'index' => 'noindex,follow'
         ],
         'article' => [
             'title' => '%s | nekudo.com',
-            'description' => '',
+            'description' => '%s',
             'index' => 'index,follow'
         ],
         'page' => [
             'title' => '%s | nekudo.com',
-            'description' => '',
+            'description' => '%s',
             'index' => 'index,follow'
         ],
     ],

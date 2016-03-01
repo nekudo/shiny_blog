@@ -1,5 +1,6 @@
 {
-    "title": "Imprint"
+    "title": "Imprint",
+    "description": "Imprint description"
 }
 
 ::METAEND::
