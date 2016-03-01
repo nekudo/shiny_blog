@@ -69,28 +69,50 @@ class HtmlResponder extends HttpResponder
      */
     public function getTitle() : string
     {
+        $config = $this->config['seo'];
         switch ($this->templateName) {
             case 'home':
-                $title = $this->config['titles']['home'];
+                $title = $config['home']['title'];
                 break;
             case 'blog':
                 if ($this->page > 1) {
-                    $title = sprintf($this->config['titles']['blog_paginated'], $this->page);
+                    $title = sprintf($config['blog_paginated']['title'], $this->page);
                 } else {
-                    $title = $this->config['titles']['blog'];
+                    $title = $config['blog']['title'];
                 }
                 break;
             case 'page':
-                $title = sprintf($this->config['titles']['page'], $this->pageTitle);
+                $title = sprintf($config['page']['title'], $this->pageTitle);
                 break;
             case 'article':
-                $title = sprintf($this->config['titles']['article'], $this->pageTitle);
+                $title = sprintf($config['article']['title'], $this->pageTitle);
                 break;
             default:
                 $title = $this->pageTitle;
                 break;
         }
         return $title;
+    }
+
+    public function getIndex() : string
+    {
+        $pageType = $this->getPageType();
+        if (!isset($this->config['seo'][$pageType])) {
+            return 'index,follow';
+        }
+        return $this->config['seo'][$pageType]['index'];
+    }
+
+    protected function getPageType() : string
+    {
+        $pageType = $this->templateName;
+        if (empty($pageType)) {
+            throw new RuntimeException('Unknown page type.');
+        }
+        if ($pageType === 'blog' && $this->page > 1) {
+            $pageType .= '_paginated';
+        }
+        return $pageType;
     }
 
     /**
