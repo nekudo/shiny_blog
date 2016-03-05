@@ -29,11 +29,12 @@ class ShowBlogAction extends BaseAction
     public function __invoke(array $arguments)
     {
         try {
+            $category = (isset($arguments['slug'])) ? $arguments['slug'] : '';
             $page = (isset($arguments['page'])) ? (int)$arguments['page'] : 0;
             $this->responder->setPage($page);
-            $this->responder->assign('articles', $this->domain->getArticles($page));
-            $this->responder->assign('urlNextPage', $this->domain->getUrlNextPage($page));
-            $this->responder->assign('urlPrevPage', $this->domain->getUrlPrevPage($page));
+            $this->responder->assign('articles', $this->domain->getArticles($page, $category));
+            $this->responder->assign('urlNextPage', $this->domain->getUrlNextPage($page, $category));
+            $this->responder->assign('urlPrevPage', $this->domain->getUrlPrevPage($page, $category));
             $this->responder->__invoke();
         } catch (NotFoundException $e) {
             $this->responder->notFound($e->getMessage());
