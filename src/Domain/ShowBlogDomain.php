@@ -18,12 +18,16 @@ class ShowBlogDomain extends ContentDomain
      * Fetches a list of articles ordered by date.
      *
      * @param int $page
+     * @param string $category
      * @throws NotFoundException
      * @return array
      */
-    public function getArticles(int $page = 0) : array
+    public function getArticles(int $page = 0, string $category = '') : array
     {
         $this->loadArticleMeta('date');
+        if (!empty($category)) {
+            $this->filterArticlesByCategory($category);
+        }
         krsort($this->articleMeta, SORT_NATURAL);
         $this->articleCount = count($this->articleMeta);
 
@@ -36,7 +40,7 @@ class ShowBlogDomain extends ContentDomain
         $limit = $this->config['pagination']['limit'];
         $start = ($page > 0) ? ($page - 1) * $limit : 0;
         $end = ($start + $limit) - 1;
-        $end = ($end > $this->articleCount) ? $this->articleCount - 1 : $end;
+        $end = ($end >= $this->articleCount) ? $this->articleCount - 1 : $end;
 
         // get articles:
         $articles = $this->getArticlesFromMeta($start, $end);
@@ -63,27 +67,34 @@ class ShowBlogDomain extends ContentDomain
      * Returns URL to previous page. Will be empty if already on first page.
      *
      * @param int $page
+     * @param string $category
      * @return string
      */
-    public function getUrlPrevPage(int $page) : string
+    public function getUrlPrevPage(int $page, string $category = '') : string
     {
         if ($page <= 1) {
             return '';
         }
         $prevPage = $page - 1;
-        if ($prevPage === 1) {
-            return $this->config['routes']['blog']['buildPattern'];
+        $pageType = (!empty($category)) ? 'category' : 'blog';
+        if ($prevPage > 1) {
+            $pageType .= '_paginated';
         }
-        return sprintf($this->config['routes']['blog_paginated']['buildPattern'], $prevPage);
+        $buildPattern = $this->config['routes'][$pageType]['buildPattern'];
+        if ($pageType === 'category' || $pageType === 'category_paginated') {
+            return sprintf($buildPattern, $category, $prevPage);
+        }
+        return sprintf($buildPattern, $prevPage);
     }
 
     /**
      * Returns URL to next page. Will be empty if already in last page.
      *
      * @param int $page
+     * @param string $category
      * @return string
      */
-    public function getUrlNextPage(int $page) : string
+    public function getUrlNextPage(int $page, string $category = '') : string
     {
         if ($page === 0) {
             $page = 1;
@@ -94,6 +105,31 @@ class ShowBlogDomain extends ContentDomain
             return '';
         }
         $nextPage = $page + 1;
-        return sprintf($this->config['routes']['blog_paginated']['buildPattern'], $nextPage);
+        $pageType = (!empty($category)) ? 'category' : 'blog';
+        $pageType .= '_paginated';
+        $buildPattern = $this->config['routes'][$pageType]['buildPattern'];
+        if ($pageType === 'category_paginated') {
+            return sprintf($buildPattern, $category, $nextPage);
+        }
+        return sprintf($buildPattern, $nextPage);
+    }
+
+    /**
+     * Unsets all items from article metadata not matching given category.
+     *
+     * @param string $category
+     */
+    protected function filterArticlesByCategory(string $category)
+    {
+        foreach ($this->articleMeta as $i => $metadata) {
+            if (empty($metadata['categories'])) {
+                unset($this->articleMeta[$i]);
+                continue;
+            }
+            if (stripos($metadata['categories'], $category) === false) {
+                unset($this->articleMeta[$i]);
+                continue;
+            }
+        }
     }
 }

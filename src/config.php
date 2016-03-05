@@ -62,6 +62,18 @@ return [
             'buildPattern' => '/blog/page-%d',
             'action' => 'blog',
         ],
+        'category' => [
+            'method' => 'GET',
+            'route' => '/blog/category/{slug:[a-z0-9-]+}',
+            'buildPattern' => '/blog/category/%s',
+            'action' => 'blog',
+        ],
+        'category_paginated' => [
+            'method' => 'GET',
+            'route' => '/blog/category/{slug:[a-z0-9-]+}/page-{page:[0-9]+}',
+            'buildPattern' => '/blog/category/%s/page-%d',
+            'action' => 'blog',
+        ],
         'article' => [
             'method' => 'GET',
             'route' => '/blog/{slug:[a-z0-9-]+}',
