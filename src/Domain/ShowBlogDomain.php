@@ -132,4 +132,38 @@ class ShowBlogDomain extends ContentDomain
             }
         }
     }
+
+    /**
+     * Returns blog title formatted as defined in config.
+     *
+     * @param int $page
+     * @param string $category
+     * @return string
+     */
+    public function getTitle(int $page, string $category = '') : string
+    {
+        $pageType = (!empty($category)) ? 'category' : 'blog';
+        if ($page > 1) {
+            $pageType .= '_paginated';
+        }
+        $seoConfig = $this->config['seo'][$pageType];
+        return sprintf($seoConfig['title'], $page);
+    }
+
+    /**
+     * Returns blog meta-description formatted as defined in config.
+     *
+     * @param int $page
+     * @param string $category
+     * @return string
+     */
+    public function getDescription(int $page, string $category = '') : string
+    {
+        $pageType = (!empty($category)) ? 'category' : 'blog';
+        if ($page > 1) {
+            $pageType .= '_paginated';
+        }
+        $seoConfig = $this->config['seo'][$pageType];
+        return sprintf($seoConfig['description'], $page);
+    }
 }

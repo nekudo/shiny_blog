@@ -72,26 +72,7 @@ class HtmlResponder extends HttpResponder
      */
     public function getTitle() : string
     {
-        $config = $this->config['seo'];
-        switch ($this->templateName) {
-            case 'blog':
-                if ($this->page > 1) {
-                    $title = sprintf($config['blog_paginated']['title'], $this->page);
-                } else {
-                    $title = $config['blog']['title'];
-                }
-                break;
-            case 'page':
-                $title = sprintf($config['page']['title'], $this->pageTitle);
-                break;
-            case 'article':
-                $title = sprintf($config['article']['title'], $this->pageTitle);
-                break;
-            default:
-                $title = $this->pageTitle;
-                break;
-        }
-        return $title;
+        return $this->pageTitle;
     }
 
     public function setDescription(string $description)
@@ -106,22 +87,7 @@ class HtmlResponder extends HttpResponder
      */
     public function getDescription() : string
     {
-        $config = $this->config['seo'];
-        $pageType = $this->getPageType();
-        switch ($pageType) {
-            case 'blog':
-            case 'blog_paginated':
-                $description = $config[$pageType]['description'];
-                break;
-            case 'page':
-            case 'article':
-                $description = sprintf($config[$pageType]['description'], $this->description);
-                break;
-            default:
-                $description = $this->description;
-                break;
-        }
-        return $description;
+        return $this->description;
     }
 
     /**

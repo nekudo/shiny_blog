@@ -21,13 +21,23 @@ return [
             'description' => 'Blog description',
             'index' => 'noindex,follow'
         ],
+        'category' => [
+            'title' => 'nekudo.com Blog',
+            'description' => 'Blog description',
+            'index' => 'noindex,follow'
+        ],
+        'category_paginated' => [
+            'title' => 'nekudo.com Blog - Page %d',
+            'description' => 'Blog description',
+            'index' => 'noindex,follow'
+        ],
         'article' => [
-            'title' => '%s | nekudo.com',
+            'title' => '%s',
             'description' => '%s',
             'index' => 'index,follow'
         ],
         'page' => [
-            'title' => '%s | nekudo.com',
+            'title' => '%s',
             'description' => '%s',
             'index' => 'index,follow'
         ],
