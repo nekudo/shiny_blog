@@ -31,6 +31,11 @@ class ShowBlogDomain extends ContentDomain
         krsort($this->articleMeta, SORT_NATURAL);
         $this->articleCount = count($this->articleMeta);
 
+        // throw 404 for empty categories:
+        if ($this->articleCount === 0 && !empty($category)) {
+            throw new NotFoundException('Category not found');
+        }
+
         // check if page number is valid:
         if ($this->pageIsValid($page) === false) {
             throw new NotFoundException('Invalid page number.');
