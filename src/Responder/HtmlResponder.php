@@ -91,17 +91,23 @@ class HtmlResponder extends HttpResponder
     }
 
     /**
-     * Gets index,follow/nofollow setting for current page type.
+     * Sets meta index/follow directives.
+     *
+     * @param string $index
+     */
+    public function setIndex(string $index)
+    {
+        $this->index = $index;
+    }
+    
+    /**
+     * Gets index,follow/nofollow setting.
      *
      * @return string
      */
     public function getIndex() : string
     {
-        $pageType = $this->getPageType();
-        if (!isset($this->config['seo'][$pageType])) {
-            return 'index,follow';
-        }
-        return $this->config['seo'][$pageType]['index'];
+        return $this->index;
     }
 
     /**

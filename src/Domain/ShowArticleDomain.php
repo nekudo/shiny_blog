@@ -26,4 +26,14 @@ class ShowArticleDomain extends ContentDomain
         $article->setMeta($articleData['meta']);
         return $article;
     }
+
+    /**
+     * Returns index/follow setting for article page.
+     *
+     * @return string
+     */
+    public function getIndex() : string
+    {
+        return $this->config['seo']['article']['index'];
+    }
 }

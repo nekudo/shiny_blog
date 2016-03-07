@@ -36,4 +36,14 @@ class ShowPageDomain extends ContentDomain
         $page->setMeta($pageContent['meta']);
         return $page;
     }
+
+    /**
+     * Fetches index/follow setting for pages.
+     *
+     * @return string
+     */
+    public function getIndex() : string
+    {
+        return $this->config['seo']['page']['index'];
+    }
 }
