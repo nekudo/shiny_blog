@@ -166,4 +166,21 @@ class ShowBlogDomain extends ContentDomain
         $seoConfig = $this->config['seo'][$pageType];
         return sprintf($seoConfig['description'], $page);
     }
+
+    /**
+     * Get index,follow setting for blog page.
+     *
+     * @param int $page
+     * @param string $category
+     * @return string
+     */
+    public function getIndex(int $page, string $category = '') : string
+    {
+        $pageType = (!empty($category)) ? 'category' : 'blog';
+        if ($page > 1) {
+            $pageType .= '_paginated';
+        }
+        $seoConfig = $this->config['seo'][$pageType];
+        return $seoConfig['index'];
+    }
 }

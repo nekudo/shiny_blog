@@ -34,6 +34,7 @@ class ShowBlogAction extends BaseAction
             $this->responder->setPage($page);
             $this->responder->setTitle($this->domain->getTitle($page, $category));
             $this->responder->setDescription($this->domain->getDescription($page, $category));
+            $this->responder->setIndex($this->domain->getIndex($page, $category));
             $this->responder->assign('articles', $this->domain->getArticles($page, $category));
             $this->responder->assign('urlNextPage', $this->domain->getUrlNextPage($page, $category));
             $this->responder->assign('urlPrevPage', $this->domain->getUrlPrevPage($page, $category));
