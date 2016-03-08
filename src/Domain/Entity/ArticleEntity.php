@@ -4,6 +4,7 @@ namespace Nekudo\ShinyBlog\Domain\Entity;
 
 class ArticleEntity extends BaseEntity
 {
+    /** @var string $author */
     protected $author = '';
     /**
      * Returns URL to article.
