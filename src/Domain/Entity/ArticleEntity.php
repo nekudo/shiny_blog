@@ -68,6 +68,11 @@ class ArticleEntity extends BaseEntity
         return sprintf($seoConfig['description'], $this->description);
     }
 
+    /**
+     * Returns article author.
+     *
+     * @return string
+     */
     public function getAuthor() : string
     {
         if (empty($this->author)) {
