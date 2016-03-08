@@ -14,6 +14,9 @@
                 <div class="article-excerpt">
                     <?php echo $article->getExcerpt(true); ?>
                 </div>
+                <div class="article-meta">
+                    published at <?php echo $article->getDate(); ?> by <?php echo $article->getAuthor(); ?>
+                </div>
             </article>
         <?php endforeach; ?>
     <?php endif; ?>

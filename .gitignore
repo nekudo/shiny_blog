@@ -9,6 +9,9 @@
 # Netbeans
 /nbproject/
 
+# VIM
+*.swp
+
 # OSX
 **.DS_Store
 
