@@ -4,6 +4,7 @@ namespace Nekudo\ShinyBlog\Domain\Entity;
 
 class ArticleEntity extends BaseEntity
 {
+    protected $author = '';
     /**
      * Returns URL to article.
      *
@@ -64,5 +65,13 @@ class ArticleEntity extends BaseEntity
             return $this->description;
         }
         return sprintf($seoConfig['description'], $this->description);
+    }
+
+    public function getAuthor() : string
+    {
+        if (empty($this->author)) {
+            return '';
+        }
+        return $this->author;
     }
 }
