@@ -44,8 +44,7 @@ class ContentDomain extends BaseDomain
             if ($file->getExtension() !== 'md') {
                 continue;
             }
-            $articleData = $this->parseContentFile($file->getPathname(), false);
-            $articleMeta = $articleData['meta'];
+            $articleMeta = $this->parseContentFile($file->getPathname(), false);
             if (empty($articleMeta[$keyName])) {
                 throw new RuntimeException('Key not found in article meta.');
             }
@@ -81,16 +80,12 @@ class ContentDomain extends BaseDomain
         $keys = array_keys($this->articleMeta);
         for ($i = $start; $i <= $end; $i++) {
             $key = $keys[$i];
-            $articleContent = $this->parseContentFile($this->articleMeta[$key]['file']);
-            $article = new ArticleEntity($this->config);
-            $article->setMeta($articleContent['meta']);
-            $article->setContent($articleContent['content']);
+            $articleData = $this->parseContentFile($this->articleMeta[$key]['file']);
+            $article = new ArticleEntity($this->config, $articleData);
             array_push($articles, $article);
         }
         return $articles;
     }
-
-
 
     /**
      * Parses a content-file and splits data into a meta and content section.
@@ -111,16 +106,14 @@ class ContentDomain extends BaseDomain
         if (strpos($this->contentRaw, '::METAEND::') === false) {
             throw new RuntimeException('Invalid content file.');
         }
-
-        $content = [];
         $sections = explode('::METAEND::', $this->contentRaw);
-        $content['meta'] = json_decode($sections[0], true);
+        $data = json_decode($sections[0], true);
         if ($includeContent === false) {
-            return $content;
+            return $data;
         }
-        $content['content'] = trim($sections[1]);
-        $this->parseMarkdownContent($content['content']);
-        return $content;
+        $data['content'] = trim($sections[1]);
+        $this->parseMarkdownContent($data['content']);
+        return $data;
     }
 
     /**

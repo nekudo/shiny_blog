@@ -6,6 +6,96 @@ class ArticleEntity extends BaseEntity
 {
     /** @var string $author */
     protected $author = '';
+
+    /** @var string $date */
+    protected $date;
+
+    /** @var string $categories */
+    protected $categories = '';
+
+    /**
+     * Init article object by setting it's properties.
+     *
+     * @param array $articleData
+     */
+    protected function init(array $articleData)
+    {
+        foreach($articleData as $key => $value) {
+            $setterName = 'set'.ucfirst($key);
+            if (method_exists($this, $setterName)) {
+                $this->{$setterName}($value);
+            }
+        }
+    }
+
+    /**
+     * Sets author property.
+     *
+     * @param string $author
+     */
+    public function setAuthor(string $author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * Returns author property.
+     *
+     * @return string
+     */
+    public function getAuthor() : string
+    {
+        return $this->author;
+    }
+
+    /**
+     * Sets date property.
+     *
+     * @param string $date
+     */
+    public function setDate(string $date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * Returns date property.
+     *
+     * @return string
+     */
+    public function getDate() : string
+    {
+        return $this->date;
+    }
+
+    /**
+     * Sets title using format from config.
+     *
+     * @param string $title
+     */
+    public function setTitle(string $title)
+    {
+        if (!empty($this->config['seo']['article']['title'])) {
+            $this->title = sprintf($this->config['seo']['article']['title'], $title);
+        } else {
+            $this->title = $title;
+        }
+    }
+
+    /**
+     * Sets description using format from config.
+     *
+     * @param string $description
+     */
+    public function setDescription(string $description)
+    {
+        if (!empty($this->config['seo']['article']['description'])) {
+            $this->description = sprintf($this->config['seo']['article']['description'], $description);
+        } else {
+            $this->description = $description;
+        }
+    }
+
     /**
      * Returns URL to article.
      *
@@ -40,44 +130,11 @@ class ArticleEntity extends BaseEntity
         return $excerpt;
     }
 
-    /**
-     * Returns article title formatted as defined in config.
-     *
-     * @return string
-     */
-    public function getTitle() : string
+    public function getCategories() : array
     {
-        $seoConfig = $this->config['seo']['article'];
-        if (empty($seoConfig['title'])) {
-            return $this->title;
+        if (empty($this->categories)) {
+            return [];
         }
-        return sprintf($seoConfig['title'], $this->title);
-    }
-
-    /**
-     * Returns article description formatted as defined in config.
-     *
-     * @return string
-     */
-    public function getDescription() : string
-    {
-        $seoConfig = $this->config['seo']['page'];
-        if (empty($seoConfig['description'])) {
-            return $this->description;
-        }
-        return sprintf($seoConfig['description'], $this->description);
-    }
-
-    /**
-     * Returns article author.
-     *
-     * @return string
-     */
-    public function getAuthor() : string
-    {
-        if (empty($this->author)) {
-            return '';
-        }
-        return $this->author;
+        $categories = explode(',', $this->categories);
     }
 }
