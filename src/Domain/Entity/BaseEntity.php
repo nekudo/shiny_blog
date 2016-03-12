@@ -2,15 +2,12 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Domain\Entity;
 
-class BaseEntity
+abstract class BaseEntity
 {
     protected $config;
 
     /** @var string $slug */
     protected $slug;
-
-    /** @var string $date */
-    protected $date;
 
     /** @var string $title */
     protected $title = '';
@@ -21,34 +18,27 @@ class BaseEntity
     /** @var string $content */
     protected $content;
 
-    public function __construct(array $config)
+    public function __construct(array $config, array $entityData)
     {
         $this->config = $config;
+        $this->init($entityData);
     }
 
     /**
-     * Sets metadata from markdown file to corresponding object properties.
+     * Initialized object by setting data into attributes.
      *
-     * @param array $metadata
+     * @param array $entityData
      */
-    public function setMeta(array $metadata)
-    {
-        foreach($metadata as $metaName => $metaValue) {
-            if(!property_exists($this, $metaName)) {
-                continue;
-            }
-            $this->{$metaName} = $metaValue;
-        }
-    }
+    abstract protected function init(array $entityData);
 
     /**
-     * Sets pages html-content.
+     * Sets slug property.
      *
-     * @param string $content
+     * @param string $slug
      */
-    public function setContent(string $content)
+    public function setSlug(string $slug)
     {
-        $this->content = $content;
+        $this->slug = $slug;
     }
 
     /**
@@ -62,13 +52,13 @@ class BaseEntity
     }
 
     /**
-     * Returns date property.
+     * Sets title property.
      *
-     * @return string
+     * @param string $title
      */
-    public function getDate() : string
+    public function setTitle(string $title)
     {
-        return $this->date;
+        $this->title = $title;
     }
 
     /**
@@ -82,6 +72,16 @@ class BaseEntity
     }
 
     /**
+     * Sets description property.
+     *
+     * @param string $description
+     */
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
+    }
+
+    /**
      * Returns meta-description property.
      *
      * @return string
@@ -89,6 +89,16 @@ class BaseEntity
     public function getDescription() : string
     {
         return $this->description;
+    }
+
+    /**
+     * Sets content property.
+     *
+     * @param string $content
+     */
+    public function setContent(string $content)
+    {
+        $this->content = $content;
     }
 
     /**
