@@ -167,4 +167,14 @@ class ArticleEntity extends BaseEntity
         }
         return $this->categories;
     }
+
+    /**
+     * Check if article has categories.
+     *
+     * @return bool
+     */
+    public function hasCategories() : bool
+    {
+        return !empty($this->categories);
+    }
 }
