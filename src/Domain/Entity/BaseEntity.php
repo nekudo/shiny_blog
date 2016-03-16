@@ -2,8 +2,12 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Domain\Entity;
 
+use Nekudo\ShinyBlog\Domain\Traits\SlugableTrait;
+
 abstract class BaseEntity
 {
+    use SlugableTrait;
+
     protected $config;
 
     /** @var string $slug */

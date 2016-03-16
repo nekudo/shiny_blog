@@ -10,8 +10,8 @@ class ArticleEntity extends BaseEntity
     /** @var string $date */
     protected $date;
 
-    /** @var string $categories */
-    protected $categories = '';
+    /** @var array $categories */
+    protected $categories = [];
 
     /**
      * Init article object by setting it's properties.
@@ -130,11 +130,41 @@ class ArticleEntity extends BaseEntity
         return $excerpt;
     }
 
+    /**
+     * Sets article categories.
+     *
+     * @param string $categories
+     * @return bool
+     */
+    public function setCategories(string $categories) : bool
+    {
+        $categories = trim($categories);
+        if (empty($categories)) {
+            return false;
+        }
+        $categoryNames = explode(',', $categories);
+        foreach ($categoryNames as $categoryName) {
+            $categorySlug = $this->makeSlug($categoryName);
+            $categoryLink = sprintf($this->config['routes']['category']['buildPattern'], $categorySlug);
+            array_push($this->categories, [
+                'name' => trim($categoryName),
+                'slug' => $categorySlug,
+                'link' => $categoryLink,
+            ]);
+        }
+        return true;
+    }
+
+    /**
+     * Returns article categories.
+     *
+     * @return array
+     */
     public function getCategories() : array
     {
         if (empty($this->categories)) {
             return [];
         }
-        $categories = explode(',', $this->categories);
+        return $this->categories;
     }
 }

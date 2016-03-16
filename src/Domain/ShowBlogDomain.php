@@ -2,10 +2,13 @@
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Domain;
 
+use Nekudo\ShinyBlog\Domain\Traits\SlugableTrait;
 use Nekudo\ShinyBlog\Exception\NotFoundException;
 
 class ShowBlogDomain extends ContentDomain
 {
+    use SlugableTrait;
+
     /** @var int $articleCount */
     protected $articleCount = 0;
 
@@ -18,21 +21,21 @@ class ShowBlogDomain extends ContentDomain
      * Fetches a list of articles ordered by date.
      *
      * @param int $page
-     * @param string $category
+     * @param string $categorySlug
      * @throws NotFoundException
      * @return array
      */
-    public function getArticles(int $page = 0, string $category = '') : array
+    public function getArticles(int $page = 0, string $categorySlug = '') : array
     {
         $this->loadArticleMeta('date');
-        if (!empty($category)) {
-            $this->filterArticlesByCategory($category);
+        if (!empty($categorySlug)) {
+            $this->filterArticlesByCategorySlug($categorySlug);
         }
         krsort($this->articleMeta, SORT_NATURAL);
         $this->articleCount = count($this->articleMeta);
 
         // throw 404 for empty categories:
-        if ($this->articleCount === 0 && !empty($category)) {
+        if ($this->articleCount === 0 && !empty($categorySlug)) {
             throw new NotFoundException('Category not found');
         }
 
@@ -122,20 +125,42 @@ class ShowBlogDomain extends ContentDomain
     /**
      * Unsets all items from article metadata not matching given category.
      *
-     * @param string $category
+     * @param string $categorySlug
      */
-    protected function filterArticlesByCategory(string $category)
+    protected function filterArticlesByCategorySlug(string $categorySlug)
     {
         foreach ($this->articleMeta as $i => $metadata) {
             if (empty($metadata['categories'])) {
                 unset($this->articleMeta[$i]);
                 continue;
             }
-            if (stripos($metadata['categories'], $category) === false) {
+            $categorySlugs = $this->getCategorySlugs($metadata['categories']);
+            if (!in_array($categorySlug, $categorySlugs)) {
                 unset($this->articleMeta[$i]);
                 continue;
             }
         }
+    }
+
+    /**
+     * Returns list of category slugs from given category names.
+     *
+     * @param string $categories
+     * @return array
+     */
+    protected function getCategorySlugs(string $categories) : array
+    {
+        $categories = trim($categories);
+        if (empty($categories)) {
+            return [];
+        }
+        $categoryNames = explode(',', $categories);
+        $categorySlugs = [];
+        foreach ($categoryNames as $categoryName) {
+            $categorySlug = $this->makeSlug($categoryName);
+            array_push($categorySlugs, $categorySlug);
+        }
+        return $categorySlugs;
     }
 
     /**
