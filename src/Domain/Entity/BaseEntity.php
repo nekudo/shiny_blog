@@ -8,7 +8,11 @@ abstract class BaseEntity
 {
     use SlugableTrait;
 
+    /** @var array $config */
     protected $config;
+
+    /** @var  string $key */
+    protected $key;
 
     /** @var string $slug */
     protected $slug;
@@ -25,15 +29,26 @@ abstract class BaseEntity
     public function __construct(array $config, array $entityData)
     {
         $this->config = $config;
+        $this->setKey();
         $this->init($entityData);
     }
+
+    abstract protected function setKey();
 
     /**
      * Initialized object by setting data into attributes.
      *
      * @param array $entityData
      */
-    abstract protected function init(array $entityData);
+    protected function init(array $entityData)
+    {
+        foreach($entityData as $key => $value) {
+            $setterName = 'set'.ucfirst($key);
+            if (method_exists($this, $setterName)) {
+                $this->{$setterName}($value);
+            }
+        }
+    }
 
     /**
      * Sets slug property.
@@ -56,13 +71,17 @@ abstract class BaseEntity
     }
 
     /**
-     * Sets title property.
+     * Sets title property using format from config.
      *
      * @param string $title
      */
     public function setTitle(string $title)
     {
-        $this->title = $title;
+        if (!empty($this->config['seo'][$this->key]['title'])) {
+            $this->title = sprintf($this->config['seo'][$this->key]['title'], $title);
+        } else {
+            $this->title = $title;
+        }
     }
 
     /**
@@ -76,13 +95,17 @@ abstract class BaseEntity
     }
 
     /**
-     * Sets description property.
+     * Sets description property using format from config.
      *
      * @param string $description
      */
     public function setDescription(string $description)
     {
-        $this->description = $description;
+        if (!empty($this->config['seo'][$this->key]['description'])) {
+            $this->description = sprintf($this->config['seo'][$this->key]['description'], $description);
+        } else {
+            $this->description = $description;
+        }
     }
 
     /**
@@ -113,5 +136,16 @@ abstract class BaseEntity
     public function getContent() : string
     {
         return $this->content;
+    }
+
+    /**
+     * Returns URL depending on entity type.
+     *
+     * @return string
+     */
+    public function getUrl() : string
+    {
+        $urlBuildPattern = $this->config['routes'][$this->key]['buildPattern'];
+        return sprintf($urlBuildPattern, $this->getSlug());
     }
 }
