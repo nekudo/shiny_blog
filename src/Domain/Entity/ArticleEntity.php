@@ -14,18 +14,11 @@ class ArticleEntity extends BaseEntity
     protected $categories = [];
 
     /**
-     * Init article object by setting it's properties.
-     *
-     * @param array $articleData
+     * Sets the entity key.
      */
-    protected function init(array $articleData)
+    protected function setKey()
     {
-        foreach($articleData as $key => $value) {
-            $setterName = 'set'.ucfirst($key);
-            if (method_exists($this, $setterName)) {
-                $this->{$setterName}($value);
-            }
-        }
+        $this->key = 'article';
     }
 
     /**
@@ -66,45 +59,6 @@ class ArticleEntity extends BaseEntity
     public function getDate() : string
     {
         return $this->date;
-    }
-
-    /**
-     * Sets title using format from config.
-     *
-     * @param string $title
-     */
-    public function setTitle(string $title)
-    {
-        if (!empty($this->config['seo']['article']['title'])) {
-            $this->title = sprintf($this->config['seo']['article']['title'], $title);
-        } else {
-            $this->title = $title;
-        }
-    }
-
-    /**
-     * Sets description using format from config.
-     *
-     * @param string $description
-     */
-    public function setDescription(string $description)
-    {
-        if (!empty($this->config['seo']['article']['description'])) {
-            $this->description = sprintf($this->config['seo']['article']['description'], $description);
-        } else {
-            $this->description = $description;
-        }
-    }
-
-    /**
-     * Returns URL to article.
-     *
-     * @return string
-     */
-    public function getUrl() : string
-    {
-        $urlBuildPattern = $this->config['routes']['article']['buildPattern'];
-        return sprintf($urlBuildPattern, $this->getSlug());
     }
 
     /**

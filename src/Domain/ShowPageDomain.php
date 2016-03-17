@@ -30,10 +30,8 @@ class ShowPageDomain extends ContentDomain
     public function getPageBySlug(string $slug) : PageEntity
     {
         $pathToContentFile = $this->config['contentsFolder'] . 'pages/' . $slug . '.md';
-        $pageContent = $this->parseContentFile($pathToContentFile);
-        $page = new PageEntity($this->config);
-        $page->setContent($pageContent['content']);
-        $page->setMeta($pageContent['meta']);
+        $pageData = $this->parseContentFile($pathToContentFile);
+        $page = new PageEntity($this->config, $pageData);
         return $page;
     }
 
