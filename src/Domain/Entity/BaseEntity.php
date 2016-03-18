@@ -11,8 +11,11 @@ abstract class BaseEntity
     /** @var array $config */
     protected $config;
 
-    /** @var  string $key */
+    /** @var string $key */
     protected $key;
+
+    /** @var string $layout */
+    protected $layout = 'default';
 
     /** @var string $slug */
     protected $slug;
@@ -48,6 +51,26 @@ abstract class BaseEntity
                 $this->{$setterName}($value);
             }
         }
+    }
+
+    /**
+     * Sets layout property.
+     *
+     * @param string $layout
+     */
+    public function setLayout(string $layout)
+    {
+        $this->layout = $layout;
+    }
+
+    /**
+     * Returns layout property.
+     *
+     * @return string
+     */
+    public function getLayout() : string
+    {
+        return $this->layout;
     }
 
     /**

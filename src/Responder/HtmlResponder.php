@@ -99,7 +99,7 @@ class HtmlResponder extends HttpResponder
     {
         $this->index = $index;
     }
-    
+
     /**
      * Gets index,follow/nofollow setting.
      *
