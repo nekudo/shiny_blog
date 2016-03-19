@@ -12,13 +12,13 @@ return [
     // SEO settings (title-tags, description, ...)
     'seo' => [
         'blog' => [
-            'title' => 'nekudo.com Blog: Project news and web development articles',
-            'description' => 'Blog description',
+            'title' => 'nekudo.com Blog - Project News and WebDev Articles',
+            'description' => 'All news about nekudo.com projects as well as general web-development related articles featuring PHP, Serveradministration and more.',
             'index' => 'index,follow'
         ],
         'blog_paginated' => [
             'title' => 'nekudo.com Blog - Page %d',
-            'description' => 'Blog description',
+            'description' => 'All news about nekudo.com projects as well as general web-development related articles featuring PHP, Serveradministration and more.',
             'index' => 'noindex,follow'
         ],
         'category' => [
@@ -45,7 +45,7 @@ return [
 
     // Articles per page:
     'pagination' => [
-        'limit' => 5,
+        'limit' => 8,
     ],
 
     // Routes to pages, articles, e.g (Hint: Every page needs its own route!)

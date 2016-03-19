@@ -35,6 +35,7 @@ class ShowArticleAction extends BaseAction
             $this->responder->setDescription($article->getDescription());
             $this->responder->setIndex($this->domain->getIndex());
             $this->responder->assign('article', $article);
+            $this->responder->assign('navActive', 'blog');
             $this->responder->__invoke();
         } catch (NotFoundException $e) {
             $this->responder->notFound($e->getMessage());

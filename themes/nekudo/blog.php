@@ -1,44 +1,40 @@
-<div class="articles">
+<section class="blog">
+    <?php if ($showTitle === true): ?>
+        <h1>Blog <small>Project news and web-development articles</small></h1>
+    <?php endif; ?>
     <?php if (empty($articles)): ?>
         <p>Sorry - no articles found.</p>
     <?php else: ?>
         <?php foreach ($articles as $article): ?>
             <article class="excerpt">
                 <header>
-                    <h2>
-                        <a href="<?php echo $article->getUrl(); ?>">
-                            <?php echo $article->getTitle(); ?>
-                        </a>
-                    </h2>
+                    <h2><a href="<?php echo $article->getUrl(); ?>"><?php echo $article->getTitle(); ?></a></h2>
+                    <div class="article-meta">
+                        published at
+                        <time datetime="<?php echo $article->getDate(); ?>" pubdate>
+                            <?php echo $article->getDate(); ?>
+                        </time>
+                    </div>
                 </header>
-                <div class="article-excerpt">
+                <blockquote class="article-excerpt">
                     <?php echo $article->getExcerpt(true); ?>
-                </div>
-                <div class="article-meta">
-                    published at <?php echo $article->getDate(); ?> by <?php echo $article->getAuthor(); ?>
-                </div>
+                </blockquote>
             </article>
         <?php endforeach; ?>
     <?php endif; ?>
-</div>
 
-<?php if (!empty($urlPrevPage) || !empty($urlNextPage)): ?>
-<nav>
-    <ul class="pagination">
-        <?php if (!empty($urlPrevPage)): ?>
-        <li class="previous-page">
-            <a href="<?php echo $urlPrevPage; ?>">
-                Previous Page
-            </a>
-        </li>
-        <?php endif; ?>
-        <?php if (!empty($urlNextPage)): ?>
-        <li class="next-page">
-            <a href="<?php echo $urlNextPage; ?>">
-                Next Page
-            </a>
-        </li>
-        <?php endif; ?>
-    </ul>
-</nav>
-<?php endif; ?>
+    <?php if (!empty($urlPrevPage) || !empty($urlNextPage)): ?>
+        <nav class="pagination">
+            <?php if (!empty($urlPrevPage)): ?>
+                <a class="previous-page" href="<?php echo $urlPrevPage; ?>">
+                    &laquo; Previous Page
+                </a>
+            <?php endif; ?>
+            <?php if (!empty($urlNextPage)): ?>
+                <a class="next-page" href="<?php echo $urlNextPage; ?>">
+                    Next Page &raquo;
+                </a>
+            <?php endif; ?>
+        </nav>
+    <?php endif; ?>
+</section>
