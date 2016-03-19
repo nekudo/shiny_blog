@@ -1,0 +1,137 @@
+body {
+	background-color: #f5f6f6;
+	color: #424242;
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 16px;
+	line-height: 26px;
+}
+body > .content {
+	margin: 0 auto;
+	padding: 0 10px;
+	max-width: 780px;
+}
+
+/** Navbar **/
+.topnav {
+	background-color: #eee;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 50px;
+}
+.topnav:after {
+	clear: both;
+	content: " ";
+	display: table;
+}
+.topnav ul {
+	margin: 0 auto;
+	padding: 0 10px;
+	max-width: 780px;
+	color: #696969;
+	list-style-type: none;
+}
+.topnav ul li {
+	display: block;
+	float: left;
+}
+.topnav ul li.active {
+	background-color: #ddd;
+}
+.topnav ul li a {
+	display: block;
+	color: #696969;
+	text-decoration: none;
+	padding: 10px;
+}
+.topnav ul li a:hover {
+	color: #2b2b2b;
+}
+.topnav ul li.first a {
+	padding-left: 0;
+	font-weight: bold;
+}
+.topnav ul li.last a {
+	padding-right: 0;
+}
+
+/** Blog **/
+.blog {
+	margin-bottom: 30px;
+}
+.article-meta {
+	font-size: 14px;
+	font-style: italic;
+	color: #696969;
+}
+.blog h1 small {
+	display: block;
+	font-size: 15px;
+}
+.blog blockquote {
+	margin: 0;
+}
+.blog article {
+	margin-bottom: 50px;
+}
+article.article pre {
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	padding: 0 10px 20px 10px;
+	font-size: 14px;
+}
+article.page,
+article.article {
+	margin-bottom: 50px;
+}
+.categories a {
+	margin-right: 5px;
+}
+
+/** Pagination **/
+nav.pagination {
+	display: flex;
+	justify-content: center;
+}
+nav.pagination a {
+	padding: 0 20px;
+}
+
+/** Footer **/
+div.footer {
+	text-align: center;
+	font-size: 11px;
+}
+
+/** Typo **/
+.hl-sm {
+	color: #808080;
+	font-size: 11px;
+	text-transform: uppercase;
+}
+
+/** Misc **/
+img.centered {
+	margin: 0 auto;
+	display: block;
+}
+
+/** Links **/
+a {
+	color: #1978d4;
+	text-decoration: none;
+}
+a:hover {
+	color: #1460aa;
+}
+a.btn {
+	background-color: #1978d4;
+	color: #fff;
+	border-radius: 3px;
+	padding: 5px 10px;
+	font-size: 14px;
+}
+a.btn:hover {
+	background-color: #1460aa;
+}

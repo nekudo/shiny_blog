@@ -1,10 +1,13 @@
-<article>
+<article class="article">
     <header>
-        <h2><?php echo $article->getTitle(); ?></h2>
-        <div class="entry-meta">
-            <?php echo $article->getDate(); ?> / by
-            <?php echo $article->getAuthor(); ?>
-        </div>  
+        <h1><?php echo $article->getTitle(); ?></h1>
+        <div class="article-meta">
+            published at
+            <time datetime="<?php echo $article->getDate(); ?>" pubdate>
+                <?php echo $article->getDate(); ?>
+            </time>
+            by <?php echo $article->getAuthor(); ?>
+        </div>
     </header>
     <div class="entry-content">
         <?php echo $article->getContent(); ?>
@@ -12,8 +15,9 @@
     <footer>
         <?php if ($article->hasCategories()): ?>
             <div class="categories">
+            <div class="hl-sm">Categories</div>
             <?php foreach ($article->getCategories() as $category): ?>
-                <a href="<?php echo $category['link']; ?>"><?php echo $category['name']; ?></a>
+                <a href="<?php echo $category['link']; ?>" class="btn"><?php echo $category['name']; ?></a>
             <?php endforeach; ?>
             </div>
         <?php endif; ?>

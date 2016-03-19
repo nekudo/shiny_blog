@@ -38,6 +38,7 @@ class ShowPageAction extends BaseAction
         $this->responder->setDescription($page->getDescription());
         $this->responder->setIndex($this->domain->getIndex());
         $this->responder->assign('page', $page);
+        $this->responder->assign('navActive', $pageAlias);
         $this->responder->__invoke();
     }
 }

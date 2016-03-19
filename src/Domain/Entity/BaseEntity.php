@@ -45,7 +45,7 @@ abstract class BaseEntity
      */
     protected function init(array $entityData)
     {
-        foreach($entityData as $key => $value) {
+        foreach ($entityData as $key => $value) {
             $setterName = 'set'.ucfirst($key);
             if (method_exists($this, $setterName)) {
                 $this->{$setterName}($value);

@@ -38,6 +38,8 @@ class ShowBlogAction extends BaseAction
             $this->responder->assign('articles', $this->domain->getArticles($page, $category));
             $this->responder->assign('urlNextPage', $this->domain->getUrlNextPage($page, $category));
             $this->responder->assign('urlPrevPage', $this->domain->getUrlPrevPage($page, $category));
+            $this->responder->assign('navActive', 'blog');
+            $this->responder->assign('showTitle', ($page < 2));
             $this->responder->__invoke();
         } catch (NotFoundException $e) {
             $this->responder->notFound($e->getMessage());
