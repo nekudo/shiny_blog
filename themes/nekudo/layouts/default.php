@@ -5,6 +5,9 @@
         <title><?php echo $this->getTitle(); ?></title>
         <meta name="robots" content="<?php echo $this->getIndex(); ?>" />
         <meta name="description" content="<?php echo $this->getDescription(); ?>">
+        <?php if (!empty($this->getFeedUrl())): ?>
+            <link rel="alternate" type="application/rss+xml" href="<?php echo $this->getFeedUrl(); ?>">
+        <?php endif; ?>
         <link rel="stylesheet" href="/themes/nekudo/css/nekudo.css">
         <link rel="stylesheet" href="/themes/nekudo/css/prism.css">
     </head>
