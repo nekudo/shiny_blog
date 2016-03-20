@@ -23,6 +23,9 @@ abstract class BaseEntity
     /** @var string $title */
     protected $title = '';
 
+    /** @var string $metaTitle */
+    protected $metaTitle = '';
+
     /** @var  string $description Meta description */
     protected $description = '';
 
@@ -115,6 +118,30 @@ abstract class BaseEntity
     public function getTitle() : string
     {
         return $this->title;
+    }
+
+    /**
+     * Sets metaTitle property using format from config.
+     *
+     * @param string $metaTitle
+     */
+    public function setMetaTitle(string $metaTitle)
+    {
+        if (!empty($this->config['seo'][$this->key]['title'])) {
+            $this->metaTitle = sprintf($this->config['seo'][$this->key]['title'], $metaTitle);
+        } else {
+            $this->metaTitle = $metaTitle;
+        }
+    }
+
+    /**
+     * Returns metaTitle property.
+     *
+     * @return string
+     */
+    public function getMetaTitle() : string
+    {
+        return $this->metaTitle;
     }
 
     /**

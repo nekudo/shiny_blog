@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 return [
     // Theme to use:
-    'theme' => 'nekudo',
+    'theme' => 'kiss',
 
     'themeSettings' => [
         'readMore' => '<a href="%s" class="btn">Read on &raquo;</a>',
@@ -12,23 +12,23 @@ return [
     // SEO settings (title-tags, description, ...)
     'seo' => [
         'blog' => [
-            'title' => 'nekudo.com Blog - Project News and WebDev Articles',
-            'description' => 'All news about nekudo.com projects as well as general web-development related articles featuring PHP, Serveradministration and more.',
+            'title' => 'ShinyBlog - A shiny blog',
+            'description' => 'Enter meta-description for blog pages.',
             'index' => 'index,follow'
         ],
         'blog_paginated' => [
-            'title' => 'nekudo.com Blog - Page %d',
-            'description' => 'All news about nekudo.com projects as well as general web-development related articles featuring PHP, Serveradministration and more.',
+            'title' => 'Meta title for paginated blog pages - Page %d',
+            'description' => 'Enter meta-description for all pages greater than page 1.',
             'index' => 'noindex,follow'
         ],
         'category' => [
-            'title' => 'nekudo.com Blog',
-            'description' => 'Blog description',
+            'title' => 'Enter Blog Category Title',
+            'description' => 'Enter meta-description for blog-categories...',
             'index' => 'noindex,follow'
         ],
         'category_paginated' => [
-            'title' => 'nekudo.com Blog - Page %d',
-            'description' => 'Blog description',
+            'title' => 'Enter Blog Category Title - Page %d',
+            'description' => 'Enter meta-description for paginated blog-categories...',
             'index' => 'noindex,follow'
         ],
         'article' => [
