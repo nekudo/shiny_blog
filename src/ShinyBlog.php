@@ -1,4 +1,13 @@
 <?php
+/**
+ * ShinyBlog
+ *
+ * by Simon Samtleben <simon@nekudo.com>
+ *
+ * A simple and clean Blog/CMS application.
+ * For more information visit: https://github.com/nekudo/shiny_blog
+ */
+
 declare(strict_types=1);
 namespace Nekudo\ShinyBlog;
 
