@@ -38,7 +38,7 @@ class ShowFeedDomain extends ContentDomain
 
         // throw 404 for empty categories:
         if ($this->articleCount === 0 && !empty($categorySlug)) {
-            throw new NotFoundException('Category not found');
+            throw new NotFoundException('Invalid Feed Request. Pleas check URL.');
         }
 
         if ($limit >= $this->articleCount) {

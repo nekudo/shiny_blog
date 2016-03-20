@@ -38,12 +38,12 @@ class ShowBlogDomain extends ContentDomain
 
         // throw 404 for empty categories:
         if ($this->articleCount === 0 && !empty($categorySlug)) {
-            throw new NotFoundException('Category not found');
+            throw new NotFoundException('Sry. The requested Category seems to be lost in space.');
         }
 
         // check if page number is valid:
         if ($this->pageIsValid($page) === false) {
-            throw new NotFoundException('Invalid page number.');
+            throw new NotFoundException('Sry. This page seems to be out of range.');
         }
 
         // convert page to start/end index:

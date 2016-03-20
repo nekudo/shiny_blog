@@ -11,6 +11,7 @@ use Nekudo\ShinyBlog\Action\ShowBlogAction;
 use Nekudo\ShinyBlog\Action\ShowFeedAction;
 use Nekudo\ShinyBlog\Action\ShowPageAction;
 use Nekudo\ShinyBlog\Responder\HttpResponder;
+use Nekudo\ShinyBlog\Responder\NotFoundResponder;
 
 class ShinyBlog
 {
@@ -73,8 +74,8 @@ class ShinyBlog
         }
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
-                $responder = new HttpResponder($this->config);
-                $responder->notFound();
+                $responder = new NotFoundResponder($this->config);
+                $responder->__invoke();
                 break;
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
                 $responder = new HttpResponder($this->config);

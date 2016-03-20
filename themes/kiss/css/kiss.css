@@ -135,3 +135,13 @@ a.btn {
 a.btn:hover {
 	background-color: #1460aa;
 }
+
+/** Not Found **/
+.not-found {
+	text-align: center;
+	margin-bottom: 80px;
+}
+.not-found .sad {
+	font-size: 3em;
+	transform: rotate(80deg);
+}

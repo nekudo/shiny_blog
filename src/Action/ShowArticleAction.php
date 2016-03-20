@@ -6,6 +6,7 @@ use Nekudo\ShinyBlog\Domain\ShowArticleDomain;
 use Nekudo\ShinyBlog\Domain\ShowFeedDomain;
 use Nekudo\ShinyBlog\Exception\NotFoundException;
 use Nekudo\ShinyBlog\Responder\ShowArticleResponder;
+use Nekudo\ShinyBlog\Responder\NotFoundResponder;
 
 class ShowArticleAction extends BaseAction
 {
@@ -44,7 +45,9 @@ class ShowArticleAction extends BaseAction
             $this->responder->assign('navActive', 'blog');
             $this->responder->__invoke();
         } catch (NotFoundException $e) {
-            $this->responder->notFound($e->getMessage());
+            $responder = new NotFoundResponder($this->config);
+            $responder->assign('info', $e->getMessage());
+            $responder->__invoke();
         }
     }
 }
