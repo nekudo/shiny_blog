@@ -34,7 +34,7 @@ class ShowPageAction extends BaseAction
         $pageAlias = $this->domain->getPageSlug();
         $page = $this->domain->getPageBySlug($pageAlias);
         $this->responder->setLayout($page->getLayout());
-        $this->responder->setTitle($page->getTitle());
+        $this->responder->setTitle($page->getMetaTitle());
         $this->responder->setDescription($page->getDescription());
         $this->responder->setIndex($this->domain->getIndex());
         $this->responder->assign('page', $page);

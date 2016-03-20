@@ -8,8 +8,8 @@
         <?php if (!empty($this->getFeedUrl())): ?>
             <link rel="alternate" type="application/rss+xml" href="<?php echo $this->getFeedUrl(); ?>">
         <?php endif; ?>
-        <link rel="stylesheet" href="/themes/nekudo/css/nekudo.css">
-        <link rel="stylesheet" href="/themes/nekudo/css/prism.css">
+        <link rel="stylesheet" href="/themes/kiss/css/kiss.css">
+        <link rel="stylesheet" href="/themes/kiss/css/prism.css">
     </head>
     <body>
         <nav class="topnav">
@@ -27,6 +27,6 @@
         <div class="footer">
             <p>nekudo.com - keep it simple :)</p>
         </div>
-        <script src="/themes/nekudo/js/prism.js"></script>
+        <script src="/themes/kiss/js/prism.js"></script>
     </body>
 </html>
