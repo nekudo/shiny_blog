@@ -6,6 +6,7 @@ use Nekudo\ShinyBlog\Domain\ShowBlogDomain;
 use Nekudo\ShinyBlog\Domain\ShowFeedDomain;
 use Nekudo\ShinyBlog\Exception\NotFoundException;
 use Nekudo\ShinyBlog\Responder\ShowBlogResponder;
+use Nekudo\ShinyBlog\Responder\NotFoundResponder;
 
 class ShowBlogAction extends BaseAction
 {
@@ -48,7 +49,9 @@ class ShowBlogAction extends BaseAction
             $this->responder->assign('showTitle', ($page < 2));
             $this->responder->__invoke();
         } catch (NotFoundException $e) {
-            $this->responder->notFound($e->getMessage());
+            $responder = new NotFoundResponder($this->config);
+            $responder->assign('info', $e->getMessage());
+            $responder->__invoke();
         }
     }
 }

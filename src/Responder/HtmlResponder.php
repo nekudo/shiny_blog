@@ -32,6 +32,9 @@ class HtmlResponder extends HttpResponder
     /** @var string $feedUrl */
     protected $feedUrl = '';
 
+    /** @var string $index */
+    protected $index = 'index,follow';
+
     /**
      * @var int $page Current page.
      */
