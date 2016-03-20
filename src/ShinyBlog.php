@@ -8,6 +8,7 @@ use FastRoute;
 use FastRoute\RouteCollector;
 use Nekudo\ShinyBlog\Action\ShowArticleAction;
 use Nekudo\ShinyBlog\Action\ShowBlogAction;
+use Nekudo\ShinyBlog\Action\ShowFeedAction;
 use Nekudo\ShinyBlog\Action\ShowPageAction;
 use Nekudo\ShinyBlog\Responder\HttpResponder;
 
@@ -33,7 +34,7 @@ class ShinyBlog
         try {
             $this->setRoutes();
             $this->dispatch();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $responder = new HttpResponder($this->config);
             $responder->error($e->getMessage());
         }
@@ -49,7 +50,7 @@ class ShinyBlog
         if (empty($this->config['routes'])) {
             throw new RuntimeException('No routes defined in configuration file.');
         }
-        $this->dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $collector) {
+        $this->dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $collector) {
             foreach ($this->config['routes'] as $routeName => $route) {
                 if (empty($route['method']) || empty($route['route']) || empty($route['action'])) {
                     throw new RuntimeException('Invalid route in configuration.');
@@ -106,6 +107,9 @@ class ShinyBlog
                 break;
             case 'blog':
                 $action = new ShowBlogAction($this->config);
+                break;
+            case 'feed':
+                $action = new ShowFeedAction($this->config);
                 break;
             default:
                 throw new RuntimeException('Invalid action.');

@@ -29,6 +29,9 @@ class HtmlResponder extends HttpResponder
     /** @var string $description Pages meta description */
     protected $description = '';
 
+    /** @var string $feedUrl */
+    protected $feedUrl = '';
+
     /**
      * @var int $page Current page.
      */
@@ -88,6 +91,26 @@ class HtmlResponder extends HttpResponder
     public function getDescription() : string
     {
         return $this->description;
+    }
+
+    /**
+     * Sets feed url property.
+     *
+     * @param string $urlPath
+     */
+    public function setFeedUrl(string $urlPath)
+    {
+        $this->feedUrl = $this->getUrlFromPath($urlPath);
+    }
+
+    /**
+     * Returns feed-url property.
+     *
+     * @return string
+     */
+    public function getFeedUrl() : string
+    {
+        return $this->feedUrl;
     }
 
     /**

@@ -6,10 +6,14 @@
 
 ::METAEND::
 
-bla bla bla
+### Responsible for this website
 
-* li
-* la
-* liste
+Simon Samtleben<br>
+Halmstr. 2<br>
+50825 Cologne<br>
+E-Mail: <a href="mailto:simon@nekudo.com">simon@nekudo.com</a>
 
-foo bar baz
+### Privacy Information
+
+This website does not use tracking codes, cookies or any other technique to store personal data.
+There are also no external scripts, fonts e.g. so no data is transferred to external domains.

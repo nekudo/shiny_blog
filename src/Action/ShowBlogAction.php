@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace Nekudo\ShinyBlog\Action;
 
 use Nekudo\ShinyBlog\Domain\ShowBlogDomain;
+use Nekudo\ShinyBlog\Domain\ShowFeedDomain;
 use Nekudo\ShinyBlog\Exception\NotFoundException;
 use Nekudo\ShinyBlog\Responder\ShowBlogResponder;
 
@@ -11,6 +12,9 @@ class ShowBlogAction extends BaseAction
     /** @var ShowBlogDomain $domain */
     protected $domain;
 
+    /** @var ShowFeedDomain $feedDomain */
+    protected $feedDomain;
+
     /** @var ShowBlogResponder $responder */
     protected $responder;
 
@@ -18,6 +22,7 @@ class ShowBlogAction extends BaseAction
     {
         parent::__construct($config);
         $this->domain = new ShowBlogDomain($this->config);
+        $this->feedDomain = new ShowFeedDomain($this->config);
         $this->responder = new ShowBlogResponder($this->config);
     }
 
@@ -35,6 +40,7 @@ class ShowBlogAction extends BaseAction
             $this->responder->setTitle($this->domain->getTitle($page, $category));
             $this->responder->setDescription($this->domain->getDescription($page, $category));
             $this->responder->setIndex($this->domain->getIndex($page, $category));
+            $this->responder->setFeedUrl($this->feedDomain->getFeedUrlPath($category));
             $this->responder->assign('articles', $this->domain->getArticles($page, $category));
             $this->responder->assign('urlNextPage', $this->domain->getUrlNextPage($page, $category));
             $this->responder->assign('urlPrevPage', $this->domain->getUrlPrevPage($page, $category));

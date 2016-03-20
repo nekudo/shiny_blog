@@ -48,6 +48,11 @@ return [
         'limit' => 8,
     ],
 
+    // RSS Feed
+    'feed' => [
+        'limit' => 20,
+    ],
+
     // Routes to pages, articles, e.g (Hint: Every page needs its own route!)
     'routes' => [
         'home' => [
@@ -83,6 +88,18 @@ return [
             'route' => '/blog/category/{slug:[a-z0-9-]+}/page-{page:[0-9]+}',
             'buildPattern' => '/blog/category/%s/page-%d',
             'action' => 'blog',
+        ],
+        'feed' => [
+            'method' => 'GET',
+            'route' => '/blog/feed',
+            'buildPattern' => '/blog/feed',
+            'action' => 'feed',
+        ],
+        'category_feed' => [
+            'method' => 'GET',
+            'route' => '/blog/feed/{slug:[a-z0-9-]+}',
+            'buildPattern' => '/blog/feed/%s',
+            'action' => 'feed',
         ],
         'article' => [
             'method' => 'GET',
