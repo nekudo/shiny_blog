@@ -2,14 +2,20 @@
 declare(strict_types=1);
 
 return [
-    // Theme to use:
+
+    // Defined the theme you want to use:
     'theme' => 'kiss',
 
     'themeSettings' => [
+
+        // Html Markup for read-more button:
         'readMore' => '<a href="%s" class="btn">Read on &raquo;</a>',
     ],
 
-    // SEO settings (title-tags, description, ...)
+    /* SEO related settings.
+     * In this section you can define title-tags, meta-description and "index/follow" settings for
+     * each page-type.
+     */
     'seo' => [
         'blog' => [
             'title' => 'ShinyBlog - A shiny blog',
@@ -43,17 +49,24 @@ return [
         ],
     ],
 
-    // Articles per page:
     'pagination' => [
+
+        // Defines how blog articles are shown per page:
         'limit' => 8,
     ],
 
-    // RSS Feed
     'feed' => [
+
+        // Defines how many artciles will show up in RSS feed:
         'limit' => 20,
     ],
 
-    // Routes to pages, articles, e.g (Hint: Every page needs its own route!)
+    /* Routing
+     *
+     * In this section you can define the URLs for every page-type.
+     * Please note that every page needs its own route.
+     * Possible actions are: blog, article, page, feed
+     */
     'routes' => [
         'home' => [
             'method' => 'GET',
