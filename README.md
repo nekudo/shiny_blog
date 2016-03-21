@@ -9,7 +9,7 @@ out there.
 
 ## Features
 
-* __Markdown based:__ Article and page contents can be written using markdown or markdown-exta syntax.
+* __Markdown based:__ Article and page contents can be written using markdown or [markdown-extra](https://michelf.ca/projects/php-markdown/extra/) syntax.
 * __Theme support:__ Create your own theme to adjust the layout of your website.
 * __Category support:__ Blog articles can be sorted into various categories.
 * __RSS feeds:__ Separate RSS feeds for all articles and article-categories are available.
@@ -80,6 +80,12 @@ All the layout is done by the _theme_. Themes live in the `/themes` folder.
 
 The best practice to adjust the stying is to copy the _kiss_ theme into your own folder and than adjust it to
 whatever you like. Don't forget to set the config to use you newly created theme!
+
+## Thanks to / Libs used
+
+* [FastRoute](https://github.com/nikic/FastRoute)
+* [Parsedown](https://github.com/erusev/parsedown)
+* [Parsedown Extra](https://github.com/erusev/parsedown-extra)
 
 ## License
 
