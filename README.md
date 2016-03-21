@@ -1,10 +1,27 @@
 # ShinyBlog
 
-A simple markdown based Blog/CMS application written in PHP.
+A simple, lightweight and easy to use Blog/CMS application.
 
-... Work in progress ...
+ShinyBlog is a very simple and easy to understand Blog/CMS solution. Create new blog-articles by just uploading
+a markdown file to your server. No overhead. This project was build with simplicity in mind. I tried to use as little
+dependencies as possible and keep the code as clean as possible to build a lightweight alternative to all the bloatware
+out there.
 
 ## Features
+
+* __Markdown based:__ Article and page contents can be written using markdown or markdown-exta syntax.
+* __Theme support:__ Create your own theme to adjust the layout of your website.
+* __Category support:__ Blog articles can be sorted into various categories.
+* __RSS feeds:__ Separate RSS feeds for all articles and article-categories are available.
+* __Pagination:__ Set how many articles you want to show per page.
+* __Basic SEO support:__ Title-Tags,Meta-Description, and index/follow stuff can be adjusted via config-file.
+* __Excerpts:__ Using a _read-more_ tag in your articles you can define the excerpt to appear on the blog-page.
+* __Clean Code:__ Well documented, PSR-0 and PSR-2 compatible PHP code.
+
+## Demo
+
+I build this software for my website [nekudo.com](https://nekudo.com) - so just check it out.
+
 
 ## Installation
 
@@ -16,15 +33,53 @@ A simple markdown based Blog/CMS application written in PHP.
 ### Installation procedure
 
 1. Clone or download repository to your server.
-2. Run ```composer install``` to install dependencies.
+2. Run `composer install` to install dependencies.
 
 ## How to use
 
 ### Adjusting configuration
 
+The first step you should do after installation is to adjust the config file. This file holds all information
+about urls, meta-tags e.g. and should be adjusted to your requirements.
+ 
+The configuration file can be found in: `/src/config.php`
+
 ### Adding contents
 
+To add new contents you just need to place a new markdown file into the `/contents/articles` or
+`/contents/pages` pages folder. New articles will automatically show up in the blog. New pages also need a new
+route to be defined in the config file.
+
+Every content file needs a _meta-block_ and a _content-block_ separated by the followin code:
+
+`::METAEND::`
+
+An article e.g. look like this:
+
+```
+{
+  "title":"Hello World!",
+  "metaTitle": "Hello World!",
+  "description": "Hello Word. A ShinyBlog dummy blog article.",
+  "date" : "2016-01-23",
+  "slug" : "hello-world",
+  "author" : "Simon", 
+  "categories":"News"
+}
+
+::METAEND::
+
+Sit by the fire. Wake up human for food at 4am chase dog then...
+```
+
+Please see the dummy markdown files for a more detailed example.
+
 ### Styling
+
+All the layout is done by the _theme_. Themes live in the `/themes` folder.
+
+The best practice to adjust the stying is to copy the _kiss_ theme into your own folder and than adjust it to
+whatever you like. Don't forget to set the config to use you newly created theme!
 
 ## License
 
