@@ -14,7 +14,3 @@
 
 # OSX
 **.DS_Store
-
-# Composer
-vendor
-composer.lock
