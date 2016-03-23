@@ -28,12 +28,11 @@ I build this software for my website [nekudo.com](https://nekudo.com) - so just 
 ### Requirements
 
 * PHP >= 7.0
-* [Composer](https://getcomposer.org/)
 
 ### Installation procedure
 
 1. Clone or download repository to your server.
-2. Run `composer install` to install dependencies.
+2. Adjust `/src/config.php`
 
 ## How to use
 
