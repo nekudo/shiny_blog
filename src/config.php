@@ -57,8 +57,24 @@ return [
 
     'feed' => [
 
-        // Defines how many artciles will show up in RSS feed:
+        // Defines how many articles will show up in RSS feed:
         'limit' => 20,
+    ],
+
+    // Defines sitemap priority and changefreq settings for different page types:
+    'sitemap' => [
+        'blog' => [
+            'changefreq' => 'daily',
+            'priority' => '1.0',
+        ],
+        'article' => [
+            'changefreq' => 'weekly',
+            'priority' => '0.5',
+        ],
+        'page' => [
+            'changefreq' => 'monthly',
+            'priority' => '0.4',
+        ],
     ],
 
     /* Routing
@@ -71,11 +87,18 @@ return [
         'home' => [
             'method' => 'GET',
             'route' => '/',
+            'buildPattern' => '/',
             'action' => 'page',
+        ],
+        'sitemap' => [
+            'method' => 'GET',
+            'route' => '/sitemap.xml',
+            'action' => 'sitemap',
         ],
         'imprint' => [
             'method' => 'GET',
-            'route' => '/imprint',
+            'route' => '/foo/imprint',
+            'buildPattern' => '/foo/imprint',
             'action' => 'page',
         ],
         'blog' => [

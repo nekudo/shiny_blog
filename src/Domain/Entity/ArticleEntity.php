@@ -6,10 +6,7 @@ class ArticleEntity extends BaseEntity
 {
     /** @var string $author */
     protected $author = '';
-
-    /** @var string $date */
-    protected $date;
-
+    
     /** @var array $categories */
     protected $categories = [];
 
@@ -39,26 +36,6 @@ class ArticleEntity extends BaseEntity
     public function getAuthor() : string
     {
         return $this->author;
-    }
-
-    /**
-     * Sets date property.
-     *
-     * @param string $date
-     */
-    public function setDate(string $date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * Returns date property.
-     *
-     * @return string
-     */
-    public function getDate() : string
-    {
-        return $this->date;
     }
 
     /**

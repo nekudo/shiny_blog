@@ -14,11 +14,12 @@ class ShowPageDomain extends ContentDomain
     public function getPageSlug() : string
     {
         $uri = rawurldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-        $pageName = trim($uri, '/');
-        if (empty($pageName)) {
-            $pageName = 'home';
+        $pathParts = explode('/', trim($uri, '/'));
+        $pageSlug = array_pop($pathParts);
+        if (empty($pageSlug)) {
+            $pageSlug = 'home';
         }
-        return $pageName;
+        return $pageSlug;
     }
 
     /**

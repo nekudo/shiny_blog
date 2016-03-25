@@ -15,9 +15,11 @@ class ContentDomain extends BaseDomain
     /** @var ParsedownExtra $markdownParser */
     protected $markdownParser;
 
-    protected $articleData = [];
-
+    /** @var array $articleMeta */
     protected $articleMeta = [];
+
+    /** @var array $pageMeta */
+    protected $pageMeta = [];
 
     public function __construct(array $config)
     {
@@ -28,15 +30,54 @@ class ContentDomain extends BaseDomain
     /**
      * Loads metadata of articles.
      *
-     * @param string $keyName Key to use as array index.
+     * @param string $keyName Name of value to use as array key.
+     * @param bool $forceReload Reload metadata even if already loaded
+     * @return bool
      */
-    protected function loadArticleMeta(string $keyName)
+    protected function loadArticleMeta(string $keyName, bool $forceReload = false) : bool
     {
+        if (!empty($this->articleMeta) && $forceReload === false) {
+            return true;
+        }
         $pathToArticleContents = $this->config['contentsFolder'] . 'articles/';
         if (!is_dir($pathToArticleContents)) {
             throw new RuntimeException('Articles folder not found.');
         }
-        $iterator = new DirectoryIterator($pathToArticleContents);
+        $this->articleMeta = $this->getContentMeta($pathToArticleContents, $keyName);
+        return true;
+    }
+
+    /**
+     * Loads metadata of pages.
+     *
+     * @param string $keyName Name of value to use as array key.
+     * @param bool $forceReload Reload metadata even if already loaded
+     * @return bool
+     */
+    protected function loadPageMeta(string $keyName, bool $forceReload = false) : bool
+    {
+        if (!empty($this->pageMeta) && $forceReload === false) {
+            return true;
+        }
+        $pathToPageContents = $this->config['contentsFolder'] . 'pages/';
+        if (!is_dir($pathToPageContents)) {
+            throw new RuntimeException('Pages folder not found.');
+        }
+        $this->pageMeta = $this->getContentMeta($pathToPageContents, $keyName);
+        return true;
+    }
+
+    /**
+     * Fetches content metadata from given folder.
+     *
+     * @param string $contentFolder
+     * @param string $keyName Name of value to use as array key. (e.g. "slug")
+     * @return array
+     */
+    protected function getContentMeta(string $contentFolder, string $keyName) : array
+    {
+        $metadata = [];
+        $iterator = new DirectoryIterator($contentFolder);
         foreach ($iterator as $file) {
             if ($file->isDot()) {
                 continue;
@@ -44,14 +85,15 @@ class ContentDomain extends BaseDomain
             if ($file->getExtension() !== 'md') {
                 continue;
             }
-            $articleMeta = $this->parseContentFile($file->getPathname(), false);
-            if (empty($articleMeta[$keyName])) {
-                throw new RuntimeException('Key not found in article meta.');
+            $itemMeta = $this->parseContentFile($file->getPathname(), false);
+            if (empty($itemMeta[$keyName])) {
+                throw new RuntimeException('Key not found in items metadata.');
             }
-            $key = $articleMeta[$keyName];
-            $this->articleMeta[$key] = $articleMeta;
-            $this->articleMeta[$key]['file'] = $file->getPathname();
+            $key = $itemMeta[$keyName];
+            $metadata[$key] = $itemMeta;
+            $metadata[$key]['file'] = $file->getPathname();
         }
+        return $metadata;
     }
 
     /**

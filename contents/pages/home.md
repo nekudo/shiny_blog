@@ -3,6 +3,7 @@
     "metaTitle": "ShinyBlog - A shiny blog :)",
     "description": "A dummy homepage...",
     "slug": "home",
+    "date" : "2016-01-23",
     "layout": "fullpage"
 }
 

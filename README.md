@@ -15,6 +15,7 @@ out there.
 * __RSS feeds:__ Separate RSS feeds for all articles and article-categories are available.
 * __Pagination:__ Set how many articles you want to show per page.
 * __Basic SEO support:__ Title-Tags,Meta-Description, and index/follow stuff can be adjusted via config-file.
+* __XML sitemap:__ Sitemap of all articles and pages is automatically generated.
 * __Excerpts:__ Using a _read-more_ tag in your articles you can define the excerpt to appear on the blog-page.
 * __Clean Code:__ Well documented, PSR-0 and PSR-2 compatible PHP code.
 
