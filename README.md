@@ -21,8 +21,7 @@ out there.
 
 ## Demo
 
-I build this software for my website [nekudo.com](https://nekudo.com) - so just check it out.
-
+My website [nekudo.com](https://nekudo.com) is based on this application so you can consider it a demo.
 
 ## Installation
 

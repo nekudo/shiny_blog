@@ -97,8 +97,8 @@ return [
         ],
         'imprint' => [
             'method' => 'GET',
-            'route' => '/foo/imprint',
-            'buildPattern' => '/foo/imprint',
+            'route' => '/imprint',
+            'buildPattern' => '/imprint',
             'action' => 'page',
         ],
         'blog' => [
