@@ -2,7 +2,8 @@
     "title": "Imprint",
     "metaTitle": "Imprint of ShinyBlog",
     "description": "Imprint description",
-    "slug": "imprint"
+    "slug": "imprint",
+    "date" : "2016-01-23"
 }
 
 ::METAEND::

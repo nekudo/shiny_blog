@@ -29,6 +29,9 @@ abstract class BaseEntity
     /** @var  string $description Meta description */
     protected $description = '';
 
+    /** @var string $date */
+    protected $date;
+
     /** @var string $content */
     protected $content;
 
@@ -176,6 +179,26 @@ abstract class BaseEntity
     public function setContent(string $content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * Sets date property.
+     *
+     * @param string $date
+     */
+    public function setDate(string $date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * Returns date property.
+     *
+     * @return string
+     */
+    public function getDate() : string
+    {
+        return $this->date;
     }
 
     /**

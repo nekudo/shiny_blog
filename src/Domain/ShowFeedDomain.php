@@ -14,11 +14,6 @@ class ShowFeedDomain extends ContentDomain
     /** @var int $articleCount */
     protected $articleCount = 0;
 
-    public function __construct(array $config)
-    {
-        parent::__construct($config);
-    }
-
     /**
      * Fetches a list of articles ordered by date.
      *

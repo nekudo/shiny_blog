@@ -19,6 +19,7 @@ use Nekudo\ShinyBlog\Action\ShowArticleAction;
 use Nekudo\ShinyBlog\Action\ShowBlogAction;
 use Nekudo\ShinyBlog\Action\ShowFeedAction;
 use Nekudo\ShinyBlog\Action\ShowPageAction;
+use Nekudo\ShinyBlog\Action\ShowSitemapAction;
 use Nekudo\ShinyBlog\Responder\HttpResponder;
 use Nekudo\ShinyBlog\Responder\NotFoundResponder;
 
@@ -120,6 +121,9 @@ class ShinyBlog
                 break;
             case 'feed':
                 $action = new ShowFeedAction($this->config);
+                break;
+            case 'sitemap':
+                $action = new ShowSitemapAction($this->config);
                 break;
             default:
                 throw new RuntimeException('Invalid action.');
