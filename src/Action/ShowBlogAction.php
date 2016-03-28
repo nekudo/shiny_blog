@@ -35,8 +35,8 @@ class ShowBlogAction extends BaseAction
     public function __invoke(array $arguments)
     {
         try {
-            $category = (isset($arguments['slug'])) ? $arguments['slug'] : '';
-            $page = (isset($arguments['page'])) ? (int)$arguments['page'] : 0;
+            $category = $arguments['slug'] ?? '';
+            $page = (int) ($arguments['page'] ?? 0);
             $this->responder->setPage($page);
             $this->responder->setTitle($this->domain->getTitle($page, $category));
             $this->responder->setDescription($this->domain->getDescription($page, $category));
