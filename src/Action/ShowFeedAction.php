@@ -29,7 +29,7 @@ class ShowFeedAction extends BaseAction
     public function __invoke(array $arguments)
     {
         try {
-            $category = (isset($arguments['slug'])) ? $arguments['slug'] : '';
+            $category = $arguments['slug'] ?? '';
             $limit = $this->config['feed']['limit'];
             $articles = $this->domain->getArticles($limit, $category);
             if (!empty($articles)) {

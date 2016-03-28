@@ -32,7 +32,7 @@ My website [nekudo.com](https://nekudo.com) is based on this application so you 
 ### Installation procedure
 
 1. Clone or download repository to your server.
-2. Adjust `/src/config.php`
+2. Rename `/src/config.sample.php` to `/src/config.php`.
 
 ## How to use
 
