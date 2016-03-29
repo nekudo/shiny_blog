@@ -92,6 +92,7 @@ class ContentDomain extends BaseDomain
             $key = $itemMeta[$keyName];
             $metadata[$key] = $itemMeta;
             $metadata[$key]['file'] = $file->getPathname();
+            $metadata[$key]['lastmod'] = $file->getMTime();
         }
         return $metadata;
     }

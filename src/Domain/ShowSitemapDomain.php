@@ -18,9 +18,10 @@ class ShowSitemapDomain extends ContentDomain
             if (!isset($this->config['routes'][$pageMeta['slug']])) {
                 continue;
             }
+            $lastmod = ($pageMeta['lastmod'] > 0 ) ? $pageMeta['lastmod'] : strtotime($pageMeta['date']);
             array_push($pagesData, [
                 'urlPath' => $this->config['routes'][$pageMeta['slug']]['buildPattern'],
-                'lastmod' => date('c', strtotime($pageMeta['date'])),
+                'lastmod' => date('c', $lastmod),
             ]);
         }
         return $pagesData;
@@ -38,9 +39,10 @@ class ShowSitemapDomain extends ContentDomain
         krsort($this->articleMeta, SORT_NATURAL);
         $articleRouteBuildPattern = $this->config['routes']['article']['buildPattern'];
         foreach ($this->articleMeta as $articleMeta) {
+            $lastmod = ($articleMeta['lastmod'] > 0 ) ? $articleMeta['lastmod'] : strtotime($articleMeta['date']);
             array_push($articlesData, [
                 'urlPath' => sprintf($articleRouteBuildPattern, $articleMeta['slug']),
-                'lastmod' => date('c', strtotime($articleMeta['date'])),
+                'lastmod' => date('c', $lastmod),
             ]);
         }
         return $articlesData;
