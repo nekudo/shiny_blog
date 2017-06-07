@@ -28,6 +28,9 @@ My website [nekudo.com](https://nekudo.com) is based on this application so you 
 ### Requirements
 
 * PHP >= 7.0
+* PHP Modules DOM, SimpleXML, XML and MBSTRING
+
+On Debian e.g. installing `php7.0 php7.0-xml php7.0-mbstring` should suffice.
 
 ### Installation procedure
 
@@ -79,6 +82,14 @@ All the layout is done by the _theme_. Themes live in the `/themes` folder.
 
 The best practice to adjust the stying is to copy the _kiss_ theme into your own folder and than adjust it to
 whatever you like. Don't forget to set the config to use you newly created theme!
+
+## Local testing
+
+From your `shiny_blog`-folder (the one containing `index.php`) run:
+
+`php -S localhost:8000`
+
+Point your browser to `http://localhost:8000`
 
 ## Thanks to / Libs used
 
