@@ -30,7 +30,7 @@ My website [nekudo.com](https://nekudo.com) is based on this application so you 
 * PHP >= 7.0
 * PHP Modules DOM, SimpleXML, XML and MBSTRING
 
-On Debian e.g. installing `php7.0 php7.0-xml php7.0-mbstrings` should suffice.
+On Debian e.g. installing `php7.0 php7.0-xml php7.0-mbstring` should suffice.
 
 ### Installation procedure
 
