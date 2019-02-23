@@ -1,3 +1,7 @@
+# Discontinued
+
+ShinyBlog has been moved to the bloatless.org project. Check out: https://github.com/bloatless/blog
+
 # ShinyBlog
 
 A simple, lightweight and easy to use Blog/CMS application.
